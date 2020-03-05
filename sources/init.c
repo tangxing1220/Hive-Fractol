@@ -13,6 +13,7 @@
 #include "fractol.h"
 #include "error_message.h"
 #include "mlx.h"
+#include "libft.h"
 
 t_frac		*frac_init(void)
 {

@@ -1,0 +1,1 @@
+gcc -Wall -Wextra -Werror -g -o fractol ./sources/main.c ./sources/utils.c ./sources/color.c ./sources/draw.c ./sources/init.c ./sources/julia.c  -I./includes/ -I./minililbX/includes/ -I./libft/includes/ -L./libft/ -L./minilibX/ -lft -lmlx -lm -framework OpenGL -framework AppKit

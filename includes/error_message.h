@@ -16,5 +16,7 @@
 # define ERR_USAGE			"Usage: ./fractol [Julia|Mandelbrot]"
 # define ERR_FRAC_INIT      "Fractol initialization error"
 # define ERR_FRAC_NAME      "Fractol name error"
+# define ERR_GET_COLOR      "Get color error"
+# define ERR_TEMP           "Point for debug"
 
 #endif

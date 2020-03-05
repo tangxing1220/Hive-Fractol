@@ -12,6 +12,10 @@
 
 #include "color.h"
 #include "fractol.h"
+#include "libft.h"
+#include "mlx.h"
+#include "error_message.h"
+
 
 static void	draw_background(t_frac *frac)
 {
@@ -23,21 +27,26 @@ static void	draw_background(t_frac *frac)
 	i = 0;
 	while (i < HEIGHT * WIDTH)
 	{
-		image[i] = (i % WIDTH < MENU_WIDTH) ? MENU_BACKGROUND : BACKGROUND;
+//		image[i] = (i % WIDTH < MENU_WIDTH) ? MENU_BACKGROUND : BACKGROUND;
+		image[i] = BACKGROUND;
 		i++;
 	}
 }
 
-void		draw(t_frac *frac, char *frac_name)
+
+void		draw(t_frac *frac)
 {
+
 	draw_background(frac);
-        if (ft_strcmp(frac_name, "julia"))
-            draw_julia(frac);
-        if (ft_strcmp(frac_name, "mandelbrot"))
-            draw_mandelbrot(frac);
-        if (ft_strcmp(frac_name, "burningship"))
-            draw_burningship(frac);
+    
+	draw_julia(frac);
+
+		
+ //       if (ft_strcmp(frac_name, "mandelbrot"))
+ //           draw_mandelbrot(frac);
+ //       if (ft_strcmp(frac_name, "burningship"))
+ //           draw_burningship(frac);
 
 	mlx_put_image_to_window(frac->mlx, frac->win, frac->img, 0, 0);
-	print_menu(frac);
+//	print_menu(frac);
 }

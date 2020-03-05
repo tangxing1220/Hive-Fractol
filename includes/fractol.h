@@ -13,9 +13,8 @@
 #ifndef FRACTAL_H
 # define FRACTAL_H
 
-# define HEIGHT			1080
-# define WIDTH			1920
-# define MENU_WIDTH		250
+# define HEIGHT			1440
+# define WIDTH			2560
 
 typedef struct			s_mouse
 {
@@ -39,11 +38,13 @@ typedef struct			s_frac
 }						t_frac;
 
 t_frac					*frac_init(void);
-void					draw(t_frac *frac, char *frac_name);
+void					draw(t_frac *frac);
 void					draw_julia(t_frac *frac);
 void					draw_mandelbrot(t_frac *frac);
 void					draw_burningship(t_frac *frac);
 void					put_pixel(t_frac *frac, int x, int y, int color); 
-int						get_color(int i);
+int						get_color(double newRe, double newIm, int maxIterate, int i);
+void					terminate(char *s);
+void					print_menu(t_frac *frac);
 
 #endif

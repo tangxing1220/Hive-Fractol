@@ -13,6 +13,9 @@
 #include <errno.h>
 #include "fractol.h"
 #include "color.h"
+#include "libft.h"
+#include "mlx.h"
+#include <stdio.h>
 
 void		terminate(char *s)
 {

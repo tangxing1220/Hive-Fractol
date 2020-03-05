@@ -17,4 +17,12 @@
 # define BACKGROUND			0x222222
 # define MENU_BACKGROUND	0x1E1E1E
 
+typedef struct	s_color
+{
+	int decimal;
+	int r;
+	int g;
+	int b;
+}				t_color;
+
 #endif
