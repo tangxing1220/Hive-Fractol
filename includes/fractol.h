@@ -13,8 +13,8 @@
 #ifndef FRACTAL_H
 # define FRACTAL_H
 
-# define HEIGHT			1440
-# define WIDTH			2560
+# define HEIGHT			1080
+# define WIDTH			1080
 
 typedef struct			s_mouse
 {
@@ -24,6 +24,15 @@ typedef struct			s_mouse
 	int					previous_x;
 	int					previous_y;
 }						t_mouse;
+
+typedef struct			s_control
+{
+	double				offset_x;
+	double				offset_y;
+	double				zoom;
+	int					select_color;
+	int					maxIterate;
+}						t_control;
 
 typedef struct			s_frac
 {
@@ -35,16 +44,21 @@ typedef struct			s_frac
 	int					size_line;
 	int					endian;
 	t_mouse				*mouse;
+	t_control			*control;
 }						t_frac;
 
 t_frac					*frac_init(void);
-void					draw(t_frac *frac);
+void					draw(t_frac *frac,char *frac_name);
 void					draw_julia(t_frac *frac);
 void					draw_mandelbrot(t_frac *frac);
 void					draw_burningship(t_frac *frac);
 void					put_pixel(t_frac *frac, int x, int y, int color); 
-int						get_color(double newRe, double newIm, int maxIterate, int i);
+int						get_color(t_frac *frac, double newRe, double newIm, int i);
 void					terminate(char *s);
 void					print_menu(t_frac *frac);
+
+void					setup_controls(t_frac *fdf);	
+int 					get_color_pattern(int color_index, int iter);	
+int						mouse_move(int x, int y, void *param);
 
 #endif

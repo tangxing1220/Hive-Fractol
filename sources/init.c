@@ -21,6 +21,13 @@ t_frac		*frac_init(void)
 
 	if (!(frac = (t_frac *)ft_memalloc(sizeof(t_frac))))
 		terminate(ERR_FRAC_INIT);
+		// initial control.
+	if (!(frac->control = (t_control *)malloc(sizeof(t_control))))
+		terminate(ERR_FRAC_INIT);
+	frac->control->zoom = 1;
+	frac->control->offset_x = 0;
+	frac->control->offset_y = 0;
+	frac->control->select_color = 1;
 	if (!(frac->mlx = mlx_init()))
 		terminate(ERR_FRAC_INIT);
 	if (!(frac->win = mlx_new_window(frac->mlx, WIDTH, HEIGHT, "Fractol")))
@@ -31,5 +38,6 @@ t_frac		*frac_init(void)
 										&(frac->size_line), &(frac->endian));
 	if (!(frac->mouse = (t_mouse *)ft_memalloc(sizeof(t_mouse))))
 		terminate(ERR_FRAC_INIT);
+	frac->mouse->is_pressed = 1;
 	return (frac);
 }

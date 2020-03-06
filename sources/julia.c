@@ -14,20 +14,19 @@
 #include <math.h>
 #include <stdio.h>
 #include "mlx.h"
+#include "color.h"
 
 
 void draw_julia(t_frac *frac)
 {
+    
+    
     double  cRe;
     double  cIm;
     double  newRe;
     double  newIm;
     double  oldRe;
     double  oldIm;
-
-    double zoom;
-    double offset_x;
-    double offset_y;
 
     int maxIterate;
     int i;
@@ -37,13 +36,11 @@ void draw_julia(t_frac *frac)
   //  double time;
   //  double old_time;
   //  double frame_time;
-    
-    zoom = 1;
-    offset_x = 0;
-    offset_y = 0;
+
     cRe = -0.7;
     cIm = 0.27015;
-    maxIterate = 128;
+    maxIterate = 50;
+
 
     height = 0;
     while(height < HEIGHT)
@@ -51,8 +48,8 @@ void draw_julia(t_frac *frac)
         width = 0;
         while (width < WIDTH)
         {
-            newRe = 3 * (width - WIDTH / 2) / (zoom * WIDTH) + offset_x;
-            newIm = 2 * (height - HEIGHT / 2) / (zoom * HEIGHT) + offset_y;
+            newRe = 3 * (width - WIDTH / 2) / (frac->control->zoom * WIDTH) + frac->control->offset_x;
+            newIm = 2 * (height - HEIGHT / 2) / (frac->control->zoom * HEIGHT) + frac->control->offset_y;
             i = 0;
             while (i < maxIterate)
             {
@@ -64,7 +61,7 @@ void draw_julia(t_frac *frac)
                     break;
                 i++;
             }
-            put_pixel(frac, width, height, get_color(newRe, newIm, maxIterate, i)); 
+            put_pixel(frac, width, height, get_color(frac, newRe, newIm, i)); 
             width++; 
         }
         height++;

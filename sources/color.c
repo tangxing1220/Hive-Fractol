@@ -31,69 +31,75 @@ void    put_pixel(t_frac *frac, int x, int y, int color)
 
 }
 
-
-
-int     get_color(double newRe, double newIm, int maxIterate,  int i)
+int get_color_pattern(int color_index, int iter)
 {
-	t_color		*color;
+	int color_r;
+	int color_g;
+	int color_b;
+	int color_value;
+
+	if (color_index == 0)
+	{
+		color_r = 0;
+		color_g = 0;
+		color_b = 0;
+	}
+	else if (color_index == 1)
+	{
+		color_r = iter;
+		color_g = 0;
+		color_b = 0;
+	}
+	else if (color_index == 2)
+	{
+		color_r = 0;
+		color_g = iter;
+		color_b = 0;
+	}
+	else if (color_index == 3)
+	{
+		color_r = 0;
+		color_g = 0;
+		color_b = iter;
+	}
+	else if (color_index == 4)
+	{
+		color_r = iter;
+		color_g = iter;
+		color_b = 0;
+	}
+	else if (color_index == 5)
+	{
+		color_r = iter;
+		color_g = iter;
+		color_b = iter;
+	}
+	else if (color_index == 6)
+	{
+		color_r = 0;
+		color_g = iter;
+		color_b = iter;
+	}
+	else if (color_index == 7)
+	{
+		color_r = iter;
+		color_g = 0;
+		color_b = iter;
+	}
+	color_value = (color_r << 16) + (color_g << 8) + color_b;
+	return (color_value);
+}
+
+
+
+int     get_color(t_frac *frac, double newRe, double newIm, int i)
+{
 	double 		iter;
-	int			select_color;
+	int			color_value;
 
-
-	select_color = 6;
-
-		iter = i - log(log(sqrt( newRe * newRe + newIm * newIm))) / log(2);
-		iter = (767 * iter) / maxIterate;
-		if (!(color = (t_color *)malloc(sizeof(t_color))))
-			terminate(ERR_GET_COLOR);
-		if (select_color == 0)
-		{
-			color->r = 0;
-			color->g = 0;
-			color->b = 0;
-		}
-		else if (select_color == 1)
-		{
-			color->r = iter;
-			color->g = 0;
-			color->b = 0;
-		}
-		else if (select_color == 2)
-		{
-			color->r = 0;
-			color->g = iter;
-			color->b = 0;
-		}
-		else if (select_color == 3)
-		{
-			color->r = 0;
-			color->g = 0;
-			color->b = iter;
-		}
-		else if (select_color == 4)
-		{
-			color->r = iter;
-			color->g = iter;
-			color->b = 0;
-		}
-		else if (select_color == 5)
-		{
-			color->r = iter;
-			color->g = iter;
-			color->b = iter;
-		}
-		else if (select_color == 6)
-		{
-			color->r = 0;
-			color->g = iter;
-			color->b = iter;
-		}
-		else if (select_color == 7)
-		{
-			color->r = iter;
-			color->g = 0;
-			color->b = iter;
-		}
-		color->decimal = (color->r << 16) + (color->g << 8) + color->b;
-	return (color->decimal);
+	color_value = 0;
+	iter = i - log(log(sqrt( newRe * newRe + newIm * newIm))) / log(2);
+	iter = (767 * iter) / frac->control->maxIterate;
+	color_value = get_color_pattern(frac->control->select_color, i);
+	return (color_value);
 }

@@ -32,15 +32,16 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
         frac_name = argv[1];
- //       if (ft_strcmp(frac_name, "julia") != 0 &&
- //           ft_strcmp(argv[1], "mandelbrot") != 0 &&
- //           ft_strcmp(argv[1], "burningship") != 0)
- //               terminate(ERR_FRAC_NAME);
+        if (ft_strcmp(frac_name, "julia") != 0 &&
+            ft_strcmp(frac_name, "mandelbrot") != 0 &&
+            ft_strcmp(frac_name, "burningship") != 0)
+                terminate(ERR_FRAC_NAME);
 		frac = frac_init();
 		draw(frac);
-		//setup_controls(frac);
+		setup_controls(frac);
 		mlx_loop(frac->mlx);
 	}
-	terminate(ERR_USAGE);
+	else
+		terminate(ERR_USAGE);
     return (0);
 }
