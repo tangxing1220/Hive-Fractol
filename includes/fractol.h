@@ -13,8 +13,8 @@
 #ifndef FRACTAL_H
 # define FRACTAL_H
 
-# define HEIGHT			900
-# define WIDTH			1440
+# define HEIGHT			800
+# define WIDTH			800
 
 typedef struct			s_mouse
 {
@@ -34,6 +34,15 @@ typedef struct			s_control
 	int					maxIterate;
 }						t_control;
 
+typedef struct			s_zoom
+{
+	double				min;
+	double				max;
+	double				factor;
+	int					count;
+}						t_zoom;
+
+
 typedef struct			s_frac
 {
 	void				*mlx;
@@ -45,6 +54,7 @@ typedef struct			s_frac
 	int					endian;
 	t_mouse				*mouse;
 	t_control			*control;
+	t_zoom				*zoom;
 }						t_frac;
 
 t_frac					*frac_init(void);

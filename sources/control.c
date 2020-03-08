@@ -23,6 +23,19 @@ void	zoom(int key, t_frac *frac)
 	else if (key == NUM_PAD_MINUS || key == MAIN_PAD_MINUS
 		|| key == MOUSE_SCROLL_DOWN)
 		frac->control->zoom /= 1.1;
+	else if ( key == MAIN_PAD_A)
+	{
+		frac->zoom->max -= 0.1 * frac->zoom->factor;
+    	frac->zoom->min += 0.15 * frac->zoom->factor;
+    	frac->zoom->factor *= 0.9349;
+    	frac->control->maxIterate += 5;
+    	frac->zoom->count++;
+
+     	if (frac->zoom->count > 30)
+    	{
+        	frac->control->maxIterate *= 1.02;
+    	}
+	}
 	draw(frac, "julia");
 }
 
@@ -88,7 +101,8 @@ int			key_press(int key, void *param)
 		change_color(key, frac);
 	}
 	else if (key == NUM_PAD_PLUS || key == MAIN_PAD_PLUS
-		|| key == NUM_PAD_MINUS || key == MAIN_PAD_MINUS)
+		|| key == NUM_PAD_MINUS || key == MAIN_PAD_MINUS
+		|| key == MAIN_PAD_A)
 	{
 		zoom(key, frac);
 	}
@@ -96,7 +110,7 @@ int			key_press(int key, void *param)
 		|| key == ARROW_LEFT || key == ARROW_RIGHT)
 	{
 		move(key, frac);
-	}	
+	}
 	return (0);
 }
 

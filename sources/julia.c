@@ -15,32 +15,25 @@
 #include <stdio.h>
 #include "mlx.h"
 #include "color.h"
+#include <stdlib.h>
 
+double map(double value, double in_min, double in_max, double out_min, double out_max)
+{
+    return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 
 void draw_julia(t_frac *frac)
 {
-    
-    
-    double  cRe;
-    double  cIm;
     double  newRe;
     double  newIm;
     double  oldRe;
     double  oldIm;
+    double  curRe;
+    double  curIm;
 
-    int maxIterate;
     int i;
     int width;
     int height;
-
-  //  double time;
-  //  double old_time;
-  //  double frame_time;
-
-    cRe = -0.7;
-    cIm = 0.27015;
-    maxIterate = 128;
-
 
     height = 0;
     while(height < HEIGHT)
@@ -48,16 +41,24 @@ void draw_julia(t_frac *frac)
         width = 0;
         while (width < WIDTH)
         {
-            newRe = 3 * (width - WIDTH / 2) / (frac->control->zoom * WIDTH) + frac->control->offset_x;
-            newIm = 2 * (height - HEIGHT / 2) / (frac->control->zoom * HEIGHT) + frac->control->offset_y;
+            newRe = map(width, 0, WIDTH, frac->zoom->min, frac->zoom->max);
+            newIm = map(height, 0, HEIGHT, frac->zoom->min, frac->zoom->max);
+ //           newRe = 3 * (width - WIDTH / 2) / (frac->control->zoom * WIDTH) + frac->control->offset_x;
+ //           newIm = 2 * (height - HEIGHT / 2) / (frac->control->zoom * HEIGHT) + frac->control->offset_y;
+            oldRe = newRe;
+            oldIm = newIm;
+            
             i = 0;
-            while (i < maxIterate)
+            while (i < frac->control->maxIterate)
             {
-                oldRe = newRe;
-                oldIm = newIm;
-                newRe = oldRe * oldRe - oldIm * oldIm + cRe;
-                newIm = 2 * oldRe * oldIm + cIm;
-                if ((newRe * newRe + newIm * newIm) > 4)
+                
+                curRe = newRe * newRe - newIm * newIm;
+                curIm = 2 * newRe * newIm;
+
+                newRe = curRe + oldRe;
+                newIm = curIm + oldIm;
+
+                if ((newRe + newIm) > 2)
                     break;
                 i++;
             }

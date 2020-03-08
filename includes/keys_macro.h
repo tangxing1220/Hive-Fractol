@@ -30,6 +30,8 @@
 # define MAIN_PAD_6			22
 # define MAIN_PAD_7			26
 
+# define MAIN_PAD_A			0
+
 # define MAIN_PAD_ESC		53
 
 # define MOUSE_SCROLL_UP	4

@@ -29,6 +29,13 @@ t_frac		*frac_init(void)
 	frac->control->offset_y = 0.0005;
 	frac->control->select_color = 1;
 	frac->control->maxIterate = 300;
+	if (!(frac->zoom = (t_zoom *)malloc(sizeof(t_zoom))))
+		terminate(ERR_FRAC_INIT);
+	frac->zoom->min = -2.84;
+	frac->zoom->max = 1.0;
+	frac->zoom->factor = 1;
+	frac->zoom->count = 0;
+
 	if (!(frac->mlx = mlx_init()))
 		terminate(ERR_FRAC_INIT);
 	if (!(frac->win = mlx_new_window(frac->mlx, WIDTH, HEIGHT, "Fractol")))
