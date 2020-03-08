@@ -13,8 +13,8 @@
 #ifndef FRACTAL_H
 # define FRACTAL_H
 
-# define HEIGHT			1080
-# define WIDTH			1080
+# define HEIGHT			900
+# define WIDTH			1440
 
 typedef struct			s_mouse
 {
@@ -58,7 +58,10 @@ void					terminate(char *s);
 void					print_menu(t_frac *frac);
 
 void					setup_controls(t_frac *fdf);	
-int 					get_color_pattern(int color_index, int iter);	
+int 					get_color_pattern(int color_index, double iter);	
 int						mouse_move(int x, int y, void *param);
+void					change_color(int key, t_frac *frac);
+void					zoom(int key, t_frac *frac);
+void					move(int key, t_frac *frac);
 
 #endif

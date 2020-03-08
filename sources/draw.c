@@ -41,10 +41,10 @@ void		draw(t_frac *frac, char *frac_name)
     
 	if (ft_strcmp(frac_name, "mandelbrot"))
 		draw_julia(frac);
-	if (ft_strcmp(frac_name, "mandelbrot"))
-		draw_mandelbrot(frac);
-	if (ft_strcmp(frac_name, "burningship"))
-		draw_burningship(frac);
+//	if (ft_strcmp(frac_name, "mandelbrot"))
+//		draw_mandelbrot(frac);
+//	if (ft_strcmp(frac_name, "burningship"))
+//		draw_burningship(frac);
 	mlx_put_image_to_window(frac->mlx, frac->win, frac->img, 0, 0);
-	print_menu(frac);
+//	print_menu(frac);
 }

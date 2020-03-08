@@ -39,7 +39,7 @@ void draw_julia(t_frac *frac)
 
     cRe = -0.7;
     cIm = 0.27015;
-    maxIterate = 50;
+    maxIterate = 128;
 
 
     height = 0;

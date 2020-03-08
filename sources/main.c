@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
             ft_strcmp(frac_name, "burningship") != 0)
                 terminate(ERR_FRAC_NAME);
 		frac = frac_init();
-		draw(frac);
+		draw(frac, frac_name);
 		setup_controls(frac);
 		mlx_loop(frac->mlx);
 	}

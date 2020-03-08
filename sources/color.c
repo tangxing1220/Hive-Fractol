@@ -31,20 +31,19 @@ void    put_pixel(t_frac *frac, int x, int y, int color)
 
 }
 
-int get_color_pattern(int color_index, int iter)
+int get_color_pattern(int color_index, double iter)
 {
 	int color_r;
 	int color_g;
 	int color_b;
 	int color_value;
 
-	if (color_index == 0)
-	{
-		color_r = 0;
-		color_g = 0;
-		color_b = 0;
-	}
-	else if (color_index == 1)
+	color_r = 0;
+	color_g = 0;
+	color_b = 0;
+	color_value = 0;
+
+	if (color_index == 1)
 	{
 		color_r = iter;
 		color_g = 0;
@@ -94,12 +93,11 @@ int get_color_pattern(int color_index, int iter)
 
 int     get_color(t_frac *frac, double newRe, double newIm, int i)
 {
-	double 		iter;
 	int			color_value;
+	double 		iter;
 
-	color_value = 0;
 	iter = i - log(log(sqrt( newRe * newRe + newIm * newIm))) / log(2);
 	iter = (767 * iter) / frac->control->maxIterate;
-	color_value = get_color_pattern(frac->control->select_color, i);
+	color_value = get_color_pattern(frac->control->select_color, iter);
 	return (color_value);
 }

@@ -30,6 +30,20 @@
 # define MAIN_PAD_6			22
 # define MAIN_PAD_7			26
 
+# define MAIN_PAD_ESC		53
+
+# define MOUSE_SCROLL_UP	4
+# define MOUSE_SCROLL_DOWN	5
+# define NUM_PAD_PLUS		69
+# define NUM_PAD_MINUS		78
+# define MAIN_PAD_PLUS		24
+# define MAIN_PAD_MINUS		27
+
+# define ARROW_UP			126
+# define ARROW_DOWN			125
+# define ARROW_LEFT			123
+# define ARROW_RIGHT		124
+
 /*
 # define MOUSE_LEFT_BUTTON	1
 # define MOUSE_RIGHT_BUTTON	2
