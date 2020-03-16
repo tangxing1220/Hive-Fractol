@@ -15,6 +15,7 @@
 #include "libft.h"
 #include "mlx.h"
 #include "error_message.h"
+#include "stdio.h"
 
 
 static void	draw_background(t_frac *frac)
@@ -39,10 +40,10 @@ void		draw(t_frac *frac, char *frac_name)
 	
 	draw_background(frac);
     
-	if (ft_strcmp(frac_name, "mandelbrot"))
+	if (ft_strcmp(frac_name, "julia") == 0)
 		draw_julia(frac);
-//	if (ft_strcmp(frac_name, "mandelbrot"))
-//		draw_mandelbrot(frac);
+	if (ft_strcmp(frac_name, "mandelbrot") == 0)
+		draw_mandelbrot(frac);
 //	if (ft_strcmp(frac_name, "burningship"))
 //		draw_burningship(frac);
 	mlx_put_image_to_window(frac->mlx, frac->win, frac->img, 0, 0);

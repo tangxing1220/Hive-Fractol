@@ -13,8 +13,8 @@
 #ifndef FRACTAL_H
 # define FRACTAL_H
 
-# define HEIGHT			800
-# define WIDTH			800
+# define HEIGHT			900
+# define WIDTH			1440
 
 typedef struct			s_mouse
 {
