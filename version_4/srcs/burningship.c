@@ -12,7 +12,7 @@
 
 #include "../incl/fractal.h"
 
-void	draw_burningship(t_fractal *fractal)
+void	draw_burningship(t_fractal *fra)
 {
 	double	cre;
 	double	cim;
@@ -31,14 +31,14 @@ void	draw_burningship(t_fractal *fractal)
 		width = 0;
 		while (width < WIDTH)
 		{
-			newre = (3 * (width - WIDTH / 2) * fractal->zoom) /\
-					(fractal->zoom * WIDTH) + fractal->offset_x;
-			newim = (2 * (height - HEIGHT / 2) * fractal->zoom) /\
-					(fractal->zoom * HEIGHT) + fractal->offset_y;
+			newre = (3 * (width - WIDTH / 2) * fra->zoom) /\
+					(fra->zoom * WIDTH) + fra->offset_x;
+			newim = (2 * (height - HEIGHT / 2) * fra->zoom) /\
+					(fra->zoom * HEIGHT) + fra->offset_y;
 			cre = newre;
 			cim = newim;
 			i = 0;
-			while (i < fractal->maxiterate)
+			while (i < fra->maxiterate)
 			{
 				oldre = newre;
 				oldim = newim;
@@ -48,8 +48,8 @@ void	draw_burningship(t_fractal *fractal)
 					break ;
 				i++;
 			}
-			col = assign_col(newre, newim, i, fractal);
-			draw_pixel(fractal, width, height, col);
+			col = assign_col(newre, newim, i, fra);
+			draw_pixel(fra, width, height, col);
 			width++;
 		}
 		height++;

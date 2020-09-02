@@ -35,7 +35,7 @@ int		get_color_pattern(int color_index, int i)
 		return (color_rgb_pattern(i, 0, i));
 }
 
-int		assign_col(double newre, double newim, int i, t_fractal *fractal)
+int		assign_col(double newre, double newim, int i, t_fractal *fra)
 {
 	double	iter;
 	int		color_value;
@@ -48,30 +48,30 @@ int		assign_col(double newre, double newim, int i, t_fractal *fractal)
 	else
 	{
 		iter = iter - log(log(sqrt(newre * newre + newim * newim))) / log(2);
-		iter = (767 * iter) / fractal->maxiterate;
-		color_value = get_color_pattern(fractal->choose_color, iter);
+		iter = (767 * iter) / fra->maxiterate;
+		color_value = get_color_pattern(fra->choose_color, iter);
 	}
 	return (color_value);
 }
 
-void	change_color(t_fractal *fractal, t_mouse *mouse)
+void	change_color(t_fractal *fra, t_mouse *mouse)
 {
-	if (ft_strcmp(fractal->name, "julia") == 0)
+	if (ft_strcmp(fra->name, "julia") == 0)
 	{
-		draw_julia(fractal, mouse);
-		mlx_put_image_to_window(fractal->mlx_ptr,\
-				fractal->win_ptr, fractal->img_ptr, 0, 0);
+		draw_julia(fra, mouse);
+		mlx_put_image_to_window(fra->mlx_ptr,\
+				fra->win_ptr, fra->img_ptr, 0, 0);
 	}
-	else if (ft_strcmp(fractal->name, "mandelbrot") == 0)
+	else if (ft_strcmp(fra->name, "mandelbrot") == 0)
 	{
-		draw_mandelbrot(fractal);
-		mlx_put_image_to_window(fractal->mlx_ptr,\
-				fractal->win_ptr, fractal->img_ptr, 0, 0);
+		draw_mandelbrot(fra);
+		mlx_put_image_to_window(fra->mlx_ptr,\
+				fra->win_ptr, fra->img_ptr, 0, 0);
 	}
-	else if (ft_strcmp(fractal->name, "burningship") == 0)
+	else if (ft_strcmp(fra->name, "burningship") == 0)
 	{
-		draw_burningship(fractal);
-		mlx_put_image_to_window(fractal->mlx_ptr,\
-				fractal->win_ptr, fractal->img_ptr, 0, 0);
+		draw_burningship(fra);
+		mlx_put_image_to_window(fra->mlx_ptr,\
+				fra->win_ptr, fra->img_ptr, 0, 0);
 	}
 }

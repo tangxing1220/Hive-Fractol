@@ -36,20 +36,20 @@ int		keyboard_key_press(int key, void *param)
 			combi->mouse->mouse_disable = 1;
 	}
 	if (key == MLX_MAIN_1)
-		combi->fractal->choose_color = 1;
+		combi->fra->choose_color = 1;
 	else if (key == MLX_MAIN_2)
-		combi->fractal->choose_color = 2;
+		combi->fra->choose_color = 2;
 	else if (key == MLX_MAIN_3)
-		combi->fractal->choose_color = 3;
+		combi->fra->choose_color = 3;
 	else if (key == MLX_MAIN_4)
-		combi->fractal->choose_color = 4;
+		combi->fra->choose_color = 4;
 	else if (key == MLX_MAIN_5)
-		combi->fractal->choose_color = 5;
+		combi->fra->choose_color = 5;
 	else if (key == MLX_MAIN_6)
-		combi->fractal->choose_color = 6;
+		combi->fra->choose_color = 6;
 	else if (key == MLX_MAIN_7)
-		combi->fractal->choose_color = 7;
-	change_color(combi->fractal, combi->mouse);
+		combi->fra->choose_color = 7;
+	change_color(combi->fra, combi->mouse);
 	return (0);
 }
 
@@ -60,15 +60,15 @@ int		mouse_movement(int x, int y, void *param)
 	combi = (t_combi *)param;
 	if (combi->mouse->mouse_disable == 0)
 	{
-		if (ft_strcmp(combi->fractal->name, "julia") == 0)
+		if (ft_strcmp(combi->fra->name, "julia") == 0)
 		{
 			if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
 				return (0);
 			combi->mouse->mouse_x = -0.002205 * (double)x;
 			combi->mouse->mouse_y = 0.00081 * (double)y;
-			draw_julia(combi->fractal, combi->mouse);
-			mlx_put_image_to_window(combi->fractal->mlx_ptr,\
-						combi->fractal->win_ptr, combi->fractal->img_ptr, 0, 0);
+			draw_julia(combi->fra, combi->mouse);
+			mlx_put_image_to_window(combi->fra->mlx_ptr,\
+						combi->fra->win_ptr, combi->fra->img_ptr, 0, 0);
 		}
 	}
 	return (0);
@@ -86,16 +86,16 @@ int		mouse_buttons_press(int button, int x, int y, void *param)
 	return (0);
 }
 
-void	combi_init(t_combi **combi, t_fractal *fractal, t_mouse *mouse)
+void	combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse)
 {
 	*combi = (t_combi *)malloc(sizeof(t_combi));
-	(*combi)->fractal = fractal;
+	(*combi)->fra = fra;
 	(*combi)->mouse = mouse;
 }
 
 void	fractal_controls(t_combi *combi)
 {
-	mlx_hook(combi->fractal->win_ptr, 4, 0, mouse_buttons_press, combi);
-	mlx_hook(combi->fractal->win_ptr, 6, 0, mouse_movement, combi);
-	mlx_hook(combi->fractal->win_ptr, 2, 0, keyboard_key_press, combi);
+	mlx_hook(combi->fra->win_ptr, 4, 0, mouse_buttons_press, combi);
+	mlx_hook(combi->fra->win_ptr, 6, 0, mouse_movement, combi);
+	mlx_hook(combi->fra->win_ptr, 2, 0, keyboard_key_press, combi);
 }

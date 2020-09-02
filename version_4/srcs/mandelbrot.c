@@ -6,61 +6,61 @@
 /*   By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 16:57:12 by xtang             #+#    #+#             */
-/*   Updated: 2020/08/27 20:30:41 by xtang            ###   ########.fr       */
+/*   Updated: 2020/09/02 18:58:30 by xtang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/fractal.h"
 
-void	draw_mandelbrot(t_fractal *fractal)
+void	mandelbrot_cacul(int width, int height, t_complex max,\
+			t_fractal *fra, t_complex factor, t_complex min)
 {
-	double	cre;
-	double	cim;
-	double	newre;
-	double	newim;
-	double	oldre;
-	double	oldim;
-	double	minre;
-	double	maxre;
-	double	minim;
-	double	maxim;
-	double	re_factor;
-	double	im_factor;
-	int		i;
-	int		width;
-	int		height;
-	int		col;
+	t_complex	new;
+	t_complex	old;
+	t_complex	c;
+	int			i;
 
-	minre = -2.05;
-	maxre = 0.95;
-	minim = -1.5;
-	maxim = minim + (maxre - minre) * HEIGHT / WIDTH;
-	re_factor = (maxre - minre) * (fractal->zoom) / (WIDTH - 1);
-	im_factor = (maxim - minim) * (fractal->zoom) / (HEIGHT - 1);
+	c.im = max.im * (fra->zoom) - height * factor.im + fra->offset_y;
+	c.re = min.re * (fra->zoom) + width * factor.re +
+				fra->offset_x;
+	new.re = c.re;
+	new.im = c.im;
+	i = 0;
+	while (i < fra->maxiterate)
+	{
+		old.re = new.re;
+		old.im = new.im;
+		new.re = old.re * old.re - old.im * old.im + c.re;
+		new.im = 2 * old.re * old.im + c.im;
+		if ((new.re * new.re + new.im * new.im) > 4)
+			break ;
+		i++;
+	}
+	draw_pixel(fra, width, height,\
+				assign_col(new.re, new.im, i, fra));
+}
+
+void	draw_mandelbrot(t_fractal *fra)
+{
+	t_complex	min;
+	t_complex	max;
+	t_complex	factor;
+	int			width;
+	int			height;
+
+	min.re = -2.05;
+	max.re = 0.95;
+	min.im = -1.5;
+	max.im = min.im + (max.re - min.re) * HEIGHT / WIDTH;
+	factor.re = (max.re - min.re) * (fra->zoom) / (WIDTH - 1);
+	factor.im = (max.im - min.im) * (fra->zoom) / (HEIGHT - 1);
 	height = 0;
 	while (height < HEIGHT)
 	{
-		cim = maxim * (fractal->zoom) - height * im_factor + fractal->offset_y;
 		width = 0;
 		while (width < WIDTH)
 		{
-			cre = minre * (fractal->zoom) + width * re_factor +
-				fractal->offset_x;
-			newre = cre;
-			newim = cim;
-			i = 0;
-			while (i < fractal->maxiterate)
-			{
-				oldre = newre;
-				oldim = newim;
-				newre = oldre * oldre - oldim * oldim + cre;
-				newim = 2 * oldre * oldim + cim;
-				if ((newre * newre + newim * newim) > 4)
-					break ;
-				i++;
-			}
-			col = assign_col(newre, newim, i, fractal);
-			draw_pixel(fractal, width, height, col);
+			mandelbrot_cacul(width, height, max, fra, factor, min);
 			width++;
 		}
 		height++;

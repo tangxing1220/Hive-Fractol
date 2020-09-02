@@ -12,15 +12,15 @@
 
 #include "../incl/fractal.h"
 
-void	draw_pixel(t_fractal *fractal, int x, int y, int col)
+void	draw_pixel(t_fractal *fra, int x, int y, int col)
 {
 	int i;
 
 	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
 	{
-		i = (x * (fractal->bits_per_pixel / 8) + y * fractal->size_line);
-		fractal->data_addr[i] = col;
-		fractal->data_addr[++i] = col >> 8;
-		fractal->data_addr[++i] = col >> 16;
+		i = (x * (fra->bits_per_pixel / 8) + y * fra->size_line);
+		fra->data_addr[i] = col;
+		fra->data_addr[++i] = col >> 8;
+		fra->data_addr[++i] = col >> 16;
 	}
 }

@@ -65,6 +65,12 @@ typedef struct	s_fractal
 	int			maxiterate;
 }				t_fractal;
 
+typedef struct s_complex
+{
+	double		re;
+	double		im;
+}				t_complex;
+
 typedef struct	s_mouse
 {
 	double		mouse_x;
@@ -74,29 +80,29 @@ typedef struct	s_mouse
 
 typedef struct	s_combi
 {
-	t_fractal	*fractal;
+	t_fractal	*fra;
 	t_mouse		*mouse;
 }				t_combi;
 
-void			draw_burningship(t_fractal *fractal);
-void			draw_julia(t_fractal *fractal, t_mouse *mouse);
-void			draw_mandelbrot(t_fractal *fractal);
-void			draw_pixel(t_fractal *fractal, int x, int y, int col);
+void			draw_burningship(t_fractal *fra);
+void			draw_julia(t_fractal *fra, t_mouse *mouse);
+void			draw_mandelbrot(t_fractal *fra);
+void			draw_pixel(t_fractal *fra, int x, int y, int col);
 
 int				assign_col(double newre, double newim, int i,\
-								t_fractal *fractal);
+								t_fractal *fra);
 
 void			fractal_controls(t_combi *combi);
 
-void			change_color(t_fractal *fractal, t_mouse *mouse);
+void			change_color(t_fractal *fra, t_mouse *mouse);
 
 void			mouse_init(t_mouse **mouse);
 
-void			combi_init(t_combi **combi, t_fractal *fractal, t_mouse *mouse);
+void			combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse);
 
 void			fractal_move(int key, t_combi *combi);
 
-void			draw_image_blackground(t_fractal *fractal);
+void			draw_image_blackground(t_fractal *fra);
 
 void			fractal_zoom(int button, t_combi *combi);
 

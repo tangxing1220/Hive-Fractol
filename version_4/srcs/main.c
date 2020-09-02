@@ -45,7 +45,7 @@ void	mouse_init(t_mouse **mouse)
 
 int		main(int argc, char **argv)
 {
-	t_fractal	*fractal;
+	t_fractal	*fra;
 	t_mouse		*mouse;
 	t_combi		*combi;
 
@@ -53,41 +53,41 @@ int		main(int argc, char **argv)
 				ft_strcmp(argv[1], "julia") == 0\
 				|| ft_strcmp(argv[1], "mandelbrot") == 0))
 	{
-		fractal = (t_fractal *)malloc(sizeof(t_fractal));
-		fractal->mlx_ptr = mlx_init();
-		fractal->win_ptr = mlx_new_window(fractal->mlx_ptr, WIDTH, HEIGHT,\
+		fra = (t_fractal *)malloc(sizeof(t_fractal));
+		fra->mlx_ptr = mlx_init();
+		fra->win_ptr = mlx_new_window(fra->mlx_ptr, WIDTH, HEIGHT,\
 							"Fractal xtang");
-		fractal->img_ptr = mlx_new_image(fractal->mlx_ptr, WIDTH, HEIGHT);
-		fractal->data_addr = mlx_get_data_addr(fractal->img_ptr, \
-				&(fractal->bits_per_pixel), &(fractal->size_line),\
-						&(fractal->endian));
-		fractal->offset_x = 0;
-		fractal->offset_y = 0;
-		fractal->zoom = 1;
-		fractal->choose_color = 1;
-		fractal->maxiterate = 45;
+		fra->img_ptr = mlx_new_image(fra->mlx_ptr, WIDTH, HEIGHT);
+		fra->data_addr = mlx_get_data_addr(fra->img_ptr, \
+				&(fra->bits_per_pixel), &(fra->size_line),\
+						&(fra->endian));
+		fra->offset_x = 0;
+		fra->offset_y = 0;
+		fra->zoom = 1;
+		fra->choose_color = 1;
+		fra->maxiterate = 45;
 		mouse_init(&mouse);
-		draw_image_blackground(fractal);
+		draw_image_blackground(fra);
 		if (ft_strcmp(argv[1], "burningship") == 0)
 		{
-			fractal->name = argv[1];
-			draw_burningship(fractal);
+			fra->name = argv[1];
+			draw_burningship(fra);
 		}
 		else if (ft_strcmp(argv[1], "julia") == 0)
 		{
-			fractal->name = argv[1];
-			draw_julia(fractal, mouse);
+			fra->name = argv[1];
+			draw_julia(fra, mouse);
 		}
 		else
 		{
-			fractal->name = argv[1];
-			draw_mandelbrot(fractal);
+			fra->name = argv[1];
+			draw_mandelbrot(fra);
 		}
-		mlx_put_image_to_window(fractal->mlx_ptr, fractal->win_ptr,\
-							fractal->img_ptr, 0, 0);
-		combi_init(&combi, fractal, mouse);
+		mlx_put_image_to_window(fra->mlx_ptr, fra->win_ptr,\
+							fra->img_ptr, 0, 0);
+		combi_init(&combi, fra, mouse);
 		fractal_controls(combi);
-		mlx_loop(fractal->mlx_ptr);
+		mlx_loop(fra->mlx_ptr);
 	}
 	else
 		print_usage();
