@@ -20,16 +20,12 @@ void	print_usage(void)
 	ft_putstr_fd("mandelbrot\tburningship\n", STDERR_FILENO);
 }
 
-void	mouse_init(t_mouse **mouse)
+void	fractal_init(t_fractal **fra, char *name, t_mouse **mouse)
 {
 	(*mouse) = (t_mouse *)malloc(sizeof(t_mouse));
 	(*mouse)->mouse_x = 0.0;
 	(*mouse)->mouse_y = 0.0;
 	(*mouse)->mouse_disable = 0;
-}
-
-void	fractal_init(t_fractal **fra, char *name)
-{
 	(*fra) = (t_fractal *)malloc(sizeof(t_fractal));
 	(*fra)->mlx_ptr = mlx_init();
 	(*fra)->win_ptr = mlx_new_window((*fra)->mlx_ptr, WIDTH, HEIGHT, "Fractal");
@@ -66,9 +62,9 @@ int		main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		fra_name = get_fractal_name(argv[1]);
-		fractal_init(&fra, fra_name);
-		mouse_init(&mouse);
+		if ((fra_name = get_fractal_name(argv[1])) == NULL)
+			return (0);
+		fractal_init(&fra, fra_name, &mouse);
 		draw_image_blackground(fra);
 		if (ft_strcmp(fra->name, "burningship") == 0)
 			draw_burningship(fra);

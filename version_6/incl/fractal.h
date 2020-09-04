@@ -6,7 +6,7 @@
 /*   By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 12:37:15 by xtang             #+#    #+#             */
-/*   Updated: 2020/08/27 18:54:25 by xtang            ###   ########.fr       */
+/*   Updated: 2020/09/04 17:18:45 by xtang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "../libft/includes/libft.h"
 # include <math.h>
 # include "mlx.h"
+# include <pthread.h>
+
+# define THREAD_NB				64
 
 # define WIDTH					1280
 # define HEIGHT					1280
@@ -63,6 +66,10 @@ typedef struct	s_fractal
 	double		zoom;
 	int			choose_color;
 	int			maxiterate;
+	int			thread;
+	int			th_height;
+	int			th_size;
+
 }				t_fractal;
 
 typedef struct	s_complex
@@ -91,6 +98,13 @@ typedef struct	s_combi
 	t_fractal	*fra;
 	t_mouse		*mouse;
 }				t_combi;
+
+typedef struct	s_multi_th
+{
+	t_fractal	*fra;
+	t_mouse		*mouse;
+	int			th_height;
+}				t_multi_th;
 
 void			draw_burningship(t_fractal *fra);
 void			draw_julia(t_fractal *fra, t_mouse *mouse);

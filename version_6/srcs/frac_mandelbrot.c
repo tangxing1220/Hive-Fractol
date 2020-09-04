@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   burningship.c                                      :+:      :+:    :+:   */
+/*   frac_mandelbrot.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/22 16:52:44 by xtang             #+#    #+#             */
-/*   Updated: 2020/08/27 19:18:01 by xtang            ###   ########.fr       */
+/*   Created: 2020/08/22 16:57:12 by xtang             #+#    #+#             */
+/*   Updated: 2020/09/04 17:31:48 by xtang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/fractal.h"
 
-static void	burningship_calculate(int width, int height, t_fractal *fra,\
-										t_complex_plain *plain)
+static void	mandelbrot_caculate(int width, int height, t_fractal *fra,\
+									t_complex_plain *plain)
 {
+	int			color;
 	int			i;
 	t_complex	c;
 	t_complex	new;
 	t_complex	old;
-	int			color;
 
-	new.im = plain->max.im * (fra->zoom) - height * plain->factor.im +\
+	c.im = plain->max.im * (fra->zoom) - height * plain->factor.im +\
 			fra->offset_y;
-	new.re = plain->min.re * (fra->zoom) + width * plain->factor.re +\
+	c.re = plain->min.re * (fra->zoom) + width * plain->factor.re +\
 			fra->offset_x;
-	c.re = new.im;
-	c.im = new.im;
+	new.re = c.re;
+	new.im = c.im;
 	i = 0;
 	while (i < fra->maxiterate)
 	{
 		old.re = new.re;
 		old.im = new.im;
 		new.re = old.re * old.re - old.im * old.im + c.re;
-		new.im = 2 * fabs(old.re * old.im) + c.im;
+		new.im = 2 * old.re * old.im + c.im;
 		if ((new.re * new.re + new.im * new.im) > 4)
 			break ;
 		i++;
@@ -57,23 +57,48 @@ static void	complex_plain_init(t_complex_plain *plain, t_fractal *fra)
 	plain->offset.im = 0.0f;
 }
 
-void		draw_burningship(t_fractal *fra)
+void		*draw_mandelbrot_thread(void *temp)
 {
+	t_multi_th		*th;
+	t_complex_plain	*plain;
 	int				width;
 	int				height;
-	t_complex_plain	*plain;
+	int				height_limit;
 
+	th = temp;
 	plain = (t_complex_plain *)malloc(sizeof(t_complex_plain));
-	complex_plain_init(plain, fra);
-	height = 0;
-	while (height < HEIGHT)
+	complex_plain_init(plain, th->fra);
+	height = th->th_height;
+	height_limit = th->th_height + (HEIGHT / THREAD_NB);
+	while (height < height_limit)
 	{
 		width = 0;
 		while (width < WIDTH)
 		{
-			burningship_calculate(width, height, fra, plain);
+			mandelbrot_caculate(width, height, th->fra, plain);
 			width++;
 		}
 		height++;
+	}
+	return (NULL);
+}
+
+void		draw_mandelbrot(t_fractal *fra)
+{
+	int			i;
+	pthread_t	thread_id[THREAD_NB];
+	t_multi_th	*th_id[THREAD_NB];
+
+	i = -1;
+	while (++i < THREAD_NB)
+	{
+		th_id[i] = (t_multi_th *)malloc(sizeof(t_multi_th));
+		th_id[i]->fra = fra;
+		th_id[i]->th_height = i * (HEIGHT / THREAD_NB);
+		pthread_create(&thread_id[i], NULL, draw_mandelbrot_thread, th_id[i]);
+	}
+	while (i--)
+	{
+		pthread_join(thread_id[i], NULL);
 	}
 }
