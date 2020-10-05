@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frac_flame.c                                       :+:      :+:    :+:   */
+/*   frac_chaosgame.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/30 17:37:58 by xtang             #+#    #+#             */
-/*   Updated: 2020/09/30 17:38:02 by xtang            ###   ########.fr       */
+/*   Created: 2020/10/02 14:39:15 by xtang             #+#    #+#             */
+/*   Updated: 2020/10/02 14:39:19 by xtang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,8 @@ void		draw_flame(t_fractal *fra)
 	}
 }
 */
-/*
-void		draw_flame(t_fractal *fra)
+
+void		draw_chaosgame(t_fractal *fra)
 {	
 	int c_x;
 	int c_y;
@@ -246,11 +246,3 @@ void		draw_flame(t_fractal *fra)
 		i++;
 	}
 }
-*/
-
-void		draw_flame(t_fractal *fra)
-{
-	
-
-}
-

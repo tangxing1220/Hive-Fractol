@@ -15,7 +15,7 @@
 char	*get_fractal_name(char *str)
 {
 	if (ft_strcmp(str, "burningship") == 0 || ft_strcmp(str, "julia") == 0\
-				|| ft_strcmp(str, "mandelbrot") == 0 || ft_strcmp(str, "flame") == 0)
+				|| ft_strcmp(str, "mandelbrot") == 0 || ft_strcmp(str, "flame") == 0 || ft_strcmp(str, "chaosgame") == 0)
 		return (str);
 	else
 	{
@@ -50,8 +50,8 @@ void	combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse)
 	*combi = (t_combi *)malloc(sizeof(t_combi));
 	(*combi)->fra = fra;
 	(*combi)->mouse = mouse;
-	if (fra->name !=)
-	show_str_in_image(fra);
+	if (ft_strcmp(fra->name, "chaosgame") != 0)
+		show_str_in_image(fra);
 }
 
 void	print_usage(void)
@@ -59,7 +59,7 @@ void	print_usage(void)
 	ft_putstr_fd("usage: ", STDERR_FILENO);
 	ft_putstr_fd("./fractol [fractal type name]\n", STDERR_FILENO);
 	ft_putstr_fd("fractal type:\tjulia\t", STDERR_FILENO);
-	ft_putstr_fd("mandelbrot\tburningship\tflame\n", STDERR_FILENO);
+	ft_putstr_fd("mandelbrot\tburningship\tchaosgame\tflame\n", STDERR_FILENO);
 }
 
 int		main(int argc, char **argv)
@@ -80,6 +80,8 @@ int		main(int argc, char **argv)
 			draw_mandelbrot(fra);
 		else if (ft_strcmp(fra->name, "julia") == 0)
 			draw_julia(fra, mouse);
+		else if (ft_strcmp(fra->name, "chaosgame") == 0)
+			draw_chaosgame(fra);
 		else if (ft_strcmp(fra->name, "flame") == 0)
 			draw_flame(fra);
 		mlx_put_image_to_window(fra->mlx_ptr, fra->win_ptr, fra->img_ptr, 0, 0);

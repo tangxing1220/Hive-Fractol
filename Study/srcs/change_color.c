@@ -35,6 +35,12 @@ void	change_color(t_fractal *fra, t_mouse *mouse)
 				fra->win_ptr, fra->img_ptr, 0, 0);
 		show_str_in_image(fra);
 	}
+	else if (ft_strcmp(fra->name, "chaosgame") == 0)
+	{
+		draw_chaosgame(fra);
+		mlx_put_image_to_window(fra->mlx_ptr,\
+				fra->win_ptr, fra->img_ptr, 0, 0);
+	}
 	else if (ft_strcmp(fra->name, "flame") == 0)
 	{
 		draw_flame(fra);
