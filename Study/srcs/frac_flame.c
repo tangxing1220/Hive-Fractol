@@ -248,7 +248,7 @@ void		draw_flame(t_fractal *fra)
 }
 */
 
-void		draw_flame(t_fractal *fra)
+void		draw_flame(void)
 {
 	
 

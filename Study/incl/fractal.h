@@ -47,6 +47,9 @@
 # define M_SCROLL_UP		4
 # define M_SCROLL_DOWN		5
 
+# define SEED				5
+# define PI					3.1415926
+
 typedef struct	s_fractal
 {
 	void		*mlx_ptr;
@@ -107,7 +110,8 @@ void			print_usage(void);
 void			draw_burningship(t_fractal *fra);
 void			draw_julia(t_fractal *fra, t_mouse *mouse);
 void			draw_mandelbrot(t_fractal *fra);
-void			draw_flame(t_fractal *fra);
+void			draw_flame(void);
+void			draw_chaosgame(t_fractal *fra);
 
 int				assign_color(double newre, double newim, int i,\
 								t_fractal *fra);

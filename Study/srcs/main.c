@@ -83,7 +83,7 @@ int		main(int argc, char **argv)
 		else if (ft_strcmp(fra->name, "chaosgame") == 0)
 			draw_chaosgame(fra);
 		else if (ft_strcmp(fra->name, "flame") == 0)
-			draw_flame(fra);
+			draw_flame();
 		mlx_put_image_to_window(fra->mlx_ptr, fra->win_ptr, fra->img_ptr, 0, 0);
 		combi_init(&combi, fra, mouse);
 		fractal_controls(combi);
