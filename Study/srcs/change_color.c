@@ -43,7 +43,7 @@ void	change_color(t_fractal *fra, t_mouse *mouse)
 	}
 	else if (ft_strcmp(fra->name, "flame") == 0)
 	{
-		draw_flame();
+		draw_flame(fra);
 		mlx_put_image_to_window(fra->mlx_ptr,\
 				fra->win_ptr, fra->img_ptr, 0, 0);
 	}

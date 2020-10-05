@@ -49,6 +49,7 @@
 
 # define SEED				5
 # define PI					3.1415926
+# define NUM_F				16
 
 typedef struct	s_fractal
 {
@@ -101,6 +102,32 @@ typedef struct	s_multi_th
 	int			th_height;
 }				t_multi_th;
 
+typedef struct s_flame_co
+{
+	double	a;
+	double	b;
+	double	c;
+	double	d;
+	double	e;
+	double	f;
+	double	pa1;
+	double	pa2;
+	double	pa3;
+	double	pa4;
+	char	red;
+	char    green;
+	char    blue;
+}				t_flame_co;
+
+typedef	struct s_f_pixel
+{
+	unsigned int counter;
+	float		 normal;
+	unsigned	char 	r;
+	unsigned	char	g;
+	unsigned	char	b;
+}				t_f_pixel;
+
 void			combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse);
 void			iteration_change(int key, t_combi *combi);
 void			draw_pixel(t_fractal *fra, int x, int y, int col);
@@ -110,7 +137,7 @@ void			print_usage(void);
 void			draw_burningship(t_fractal *fra);
 void			draw_julia(t_fractal *fra, t_mouse *mouse);
 void			draw_mandelbrot(t_fractal *fra);
-void			draw_flame(void);
+void			draw_flame(t_fractal *fra);
 void			draw_chaosgame(t_fractal *fra);
 
 int				assign_color(double newre, double newim, int i,\
