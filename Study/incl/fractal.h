@@ -114,18 +114,18 @@ typedef struct s_flame_co
 	double	pa2;
 	double	pa3;
 	double	pa4;
-	char	red;
-	char    green;
-	char    blue;
+	int		red;
+	int    green;
+	int    blue;
 }				t_flame_co;
 
 typedef	struct s_f_pixel
 {
 	unsigned int counter;
 	float		 normal;
-	unsigned	char 	r;
-	unsigned	char	g;
-	unsigned	char	b;
+	unsigned	int 	r;
+	unsigned	int		g;
+	unsigned	int 	b;
 }				t_f_pixel;
 
 void			combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse);
