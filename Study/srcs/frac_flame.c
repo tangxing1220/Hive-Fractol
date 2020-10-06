@@ -250,6 +250,7 @@ void		draw_flame(t_fractal *fra)
 
 void		draw_flame(t_fractal *fra)
 {
+
 	time_t t;
 	int samples;
 	int s_i;
@@ -264,8 +265,10 @@ void		draw_flame(t_fractal *fra)
 	int		scr_y;
 	int	i_i;
 	int iteration;
-	t_flame_co	*flame_co[NUM_F];
-	t_f_pixel	f_pixel[HEIGHT][WIDTH];
+	
+	t_flame_co	flame_co[NUM_F];
+
+	t_f_pixel	**f_pixel;
 
 	int row;
 	int col;
@@ -279,8 +282,19 @@ void		draw_flame(t_fractal *fra)
 	double gamma;
 	int color;
 	
+	int temp;
+
 	
+	f_pixel = (t_f_pixel **)malloc(sizeof(t_f_pixel *) * HEIGHT);
+	temp = 0;
+	while ( temp < HEIGHT)
+	{
+		f_pixel[temp] = (t_f_pixel *)malloc (sizeof(t_f_pixel) * WIDTH);
+		temp++;
+	}
+
 	plain = (t_complex_plain *)malloc(sizeof(t_complex_plain));
+
 	plain->max.re = 1.777;
 	plain->max.im = 1.0;
 	plain->min.re = -1.777;
@@ -294,21 +308,22 @@ void		draw_flame(t_fractal *fra)
 	i = 0;
 	while (i < NUM_F)
 	{
-		flame_co[i] = (t_flame_co *)malloc(sizeof(t_flame_co));
-		flame_co[i]->a = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
-		flame_co[i]->b = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
-		flame_co[i]->c = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
-		flame_co[i]->d = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
-		flame_co[i]->e = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
-		flame_co[i]->f = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
-		flame_co[i]->pa1 = -2.0 + 1.0 * rand() / RAND_MAX * ( 2.0 - (-2.0));
-		flame_co[i]->pa2 = -2.0 + 1.0 * rand() / RAND_MAX * ( 2.0 - (-2.0));
-		flame_co[i]->pa3 = -2.0 + 1.0 * rand() / RAND_MAX * ( 2.0 - (-2.0));
-		flame_co[i]->pa4 = -2.0 + 1.0 * rand() / RAND_MAX * ( 2.0 - (-2.0));
+		
+		flame_co[i].a = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
+		flame_co[i].b = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
+		flame_co[i].c = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
+		flame_co[i].d = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
+		flame_co[i].e = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
+		flame_co[i].f = -1.5 + 1.0 * rand() / RAND_MAX * ( 1.5 - (-1.5));
+		flame_co[i].pa1 = -2.0 + 1.0 * rand() / RAND_MAX * ( 2.0 - (-2.0));
+		flame_co[i].pa2 = -2.0 + 1.0 * rand() / RAND_MAX * ( 2.0 - (-2.0));
+		flame_co[i].pa3 = -2.0 + 1.0 * rand() / RAND_MAX * ( 2.0 - (-2.0));
+		flame_co[i].pa4 = -2.0 + 1.0 * rand() / RAND_MAX * ( 2.0 - (-2.0));
 
-		flame_co[i]->red = 64 + rand() % (255 - 64);
-		flame_co[i]->green = 64 + rand() % (255 - 64);
-		flame_co[i]->blue = 64 + rand() % (255 - 64);
+		flame_co[i].red = 64 + rand() % (255 - 64);
+		flame_co[i].green = 64 + rand() % (255 - 64);
+		flame_co[i].blue = 64 + rand() % (255 - 64);
+		i++;
 	}
 
 	s_i = 0;
@@ -322,10 +337,9 @@ void		draw_flame(t_fractal *fra)
 		{
 			rand_f = rand() % NUM_F;
 
-			x = flame_co[rand_f]->a * p_x + flame_co[rand_f]->b * p_y + flame_co[rand_f]->c;
-			y = flame_co[rand_f]->d * p_x + flame_co[rand_f]->e * p_y + flame_co[rand_f]->f;
+			x = flame_co[rand_f].a * p_x + flame_co[rand_f].b * p_y + flame_co[rand_f].c;
+			y = flame_co[rand_f].d * p_x + flame_co[rand_f].e * p_y + flame_co[rand_f].f;
 
-			/* Spiral */
 			r = sqrt (x * x + y * y);
 			theta = atan2(y, x);
 			p_x = (1.0 / r) * (cos (theta) + sin (r));
@@ -345,28 +359,27 @@ void		draw_flame(t_fractal *fra)
 
 					if ( f_pixel[scr_y][scr_x].counter == 0)
 					{
-						f_pixel[scr_y][scr_x].r = flame_co[rand_f]->red;
-						f_pixel[scr_y][scr_x].g = flame_co[rand_f]->green;
-						f_pixel[scr_y][scr_x].b = flame_co[rand_f]->blue;
+						f_pixel[scr_y][scr_x].r = flame_co[rand_f].red;
+						f_pixel[scr_y][scr_x].g = flame_co[rand_f].green;
+						f_pixel[scr_y][scr_x].b = flame_co[rand_f].blue;
 					}
 					else
 					{
-						f_pixel[scr_y][scr_x].r = + f_pixel[scr_y][scr_x].r + flame_co[rand_f]->red / 2;
-						f_pixel[scr_y][scr_x].g = + f_pixel[scr_y][scr_x].g + flame_co[rand_f]->green / 2;
-						f_pixel[scr_y][scr_x].b = + f_pixel[scr_y][scr_x].b + flame_co[rand_f]->blue / 2;
+						f_pixel[scr_y][scr_x].r = f_pixel[scr_y][scr_x].r + flame_co[rand_f].red / 2;
+						f_pixel[scr_y][scr_x].g = f_pixel[scr_y][scr_x].g + flame_co[rand_f].green / 2;
+						f_pixel[scr_y][scr_x].b = f_pixel[scr_y][scr_x].b + flame_co[rand_f].blue / 2;
 					}
 					f_pixel[scr_y][scr_x].counter++;
 				}
 			}
 			i_i++;
 		}
-
 		s_i++;
 	}
 
 	max = 0;
 	row = 0;
-	while(row < HEIGHT)
+	while (row < HEIGHT)
 	{
 		col = 0;
 		while (col < WIDTH)
@@ -384,7 +397,7 @@ void		draw_flame(t_fractal *fra)
 
 	gamma = 2.2;
 	row = 0;
-	while(row < HEIGHT)
+	while (row < HEIGHT)
 	{
 		col = 0;
 		while (col < WIDTH)
@@ -405,7 +418,7 @@ void		draw_flame(t_fractal *fra)
 	}
 
 	row = 0;
-	while(row < HEIGHT)
+	while (row < HEIGHT)
 	{
 		col = 0;
 		while (col < WIDTH)
@@ -415,7 +428,7 @@ void		draw_flame(t_fractal *fra)
 				color = (f_pixel[row][col].r << 16 | f_pixel[row][col].g << 8 | f_pixel[row][col].b);
 
 				draw_pixel(fra, row, col, color);				
-									
+					
 			} 
 			col++;
 		}
