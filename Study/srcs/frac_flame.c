@@ -421,7 +421,5 @@ void		draw_flame(t_fractal *fra)
 		}
 		row++;
 	}
-
-
 }
 
