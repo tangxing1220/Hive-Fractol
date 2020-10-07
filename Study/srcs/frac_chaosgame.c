@@ -211,7 +211,7 @@ void		draw_chaosgame(t_fractal *fra)
 	int		len;
 
 	present = 0.58;
-	srand((unsigned) time(&t));
+//	srand((unsigned) time(&t));
 
 	c_x = WIDTH /2;
 	c_y = HEIGHT /2;
@@ -221,7 +221,7 @@ void		draw_chaosgame(t_fractal *fra)
 	j = 0;
 	while (j < SEED)
 	{
-		angle = j * 2 * PI / SEED;
+		angle = j * 2 * M_PI / SEED;
 		s_x[j] = WIDTH / 2 + len * cos(angle);
 		s_y[j] = HEIGHT / 2 + len * sin(angle);
 		draw_pixel(fra, s_x[j], s_y[j], 0xFF4500);

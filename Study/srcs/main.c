@@ -50,7 +50,7 @@ void	combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse)
 	*combi = (t_combi *)malloc(sizeof(t_combi));
 	(*combi)->fra = fra;
 	(*combi)->mouse = mouse;
-	if (ft_strcmp(fra->name, "chaosgame") != 0)
+	if (ft_strcmp(fra->name, "chaosgame") != 0 && ft_strcmp(fra->name, "flame") != 0)
 		show_str_in_image(fra);
 }
 

@@ -18,12 +18,13 @@
 # include <pthread.h>
 # include "../libft/includes/libft.h"
 # include "mlx.h"
+# include <stdio.h>
 
 # define THREAD_NB			64
 # define TXT_COL			0xFFFFFF
 
 # define WIDTH				1920
-# define HEIGHT				1280
+# define HEIGHT				1080
 
 # define MAIN_1				18
 # define MAIN_2				19
@@ -48,7 +49,6 @@
 # define M_SCROLL_DOWN		5
 
 # define SEED				5
-# define PI					3.1415926
 # define NUM_F				16
 
 typedef struct	s_fractal
@@ -115,17 +115,17 @@ typedef struct s_flame_co
 	double	pa3;
 	double	pa4;
 	int		red;
-	int    green;
-	int    blue;
+	int    	green;
+	int    	blue;
 }				t_flame_co;
 
 typedef	struct s_f_pixel
 {
 	unsigned int counter;
 	float		 normal;
-	unsigned	int 	r;
-	unsigned	int		g;
-	unsigned	int 	b;
+	int 	r;
+	int		g;
+	int 	b;
 }				t_f_pixel;
 
 void			combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse);

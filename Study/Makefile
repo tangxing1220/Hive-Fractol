@@ -12,7 +12,7 @@
 
 NAME = fractol
 
-#FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra -g
 FLAGS = -g
 
 INC_PATH = incl
@@ -34,7 +34,6 @@ SOURCES = main.c \
 SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
 
-#MLX = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -lpthread
 MLX = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -lpthread
 
 .PHONY: all libft tmp clean fclean re
