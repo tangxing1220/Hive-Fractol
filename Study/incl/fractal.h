@@ -49,7 +49,7 @@
 # define M_SCROLL_DOWN		5
 
 # define SEED				5
-# define NUM_F				16
+# define NUM_F				6
 
 typedef struct	s_fractal
 {
@@ -102,7 +102,7 @@ typedef struct	s_multi_th
 	int			th_height;
 }				t_multi_th;
 
-typedef struct s_flame_co
+typedef struct	s_flame_co
 {
 	double	a;
 	double	b;
@@ -115,17 +115,17 @@ typedef struct s_flame_co
 	double	pa3;
 	double	pa4;
 	int		red;
-	int    	green;
-	int    	blue;
+	int		green;
+	int		blue;
 }				t_flame_co;
 
-typedef	struct s_f_pixel
+typedef	struct	s_f_pixel
 {
-	unsigned int counter;
-	float		 normal;
-	int 	r;
-	int		g;
-	int 	b;
+	unsigned int	counter;
+	float			normal;
+	int				r;
+	int				g;
+	int				b;
 }				t_f_pixel;
 
 void			combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse);
