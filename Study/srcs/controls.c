@@ -37,7 +37,6 @@ int		keyboard_key_press(int key, void *param)
 		key == MAIN_4 || key == MAIN_5 || key == MAIN_6 || key == MAIN_7)
 		color_pattern(key, combi);
 	if (key == MAIN_SPC)
-		printf("key = %d", key);
 		flame_pattern(key,combi);
 
 	return (0);

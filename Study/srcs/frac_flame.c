@@ -44,6 +44,8 @@ void		draw_flame(t_fractal *fra)
 	t_complex_plain	*plain;
 	t_flame_co		flame_co[NUM_F];
 	t_f_pixel		**f_pixel;
+	double 			p0;
+	double			p1;
 
 	symmetry = 1;
 	f_pixel = (t_f_pixel **)malloc(sizeof(t_f_pixel *) * HEIGHT);
@@ -58,8 +60,8 @@ void		draw_flame(t_fractal *fra)
 	plain->max.im = 1.0;
 	plain->min.re = -1.777;
 	plain->min.im = -1.0;
-	iteration = 800;
-	samples = 1000;
+	iteration = 1000;
+	samples = 10000;
 	srand((unsigned)time(&t));
 	i = 0;
 	while (i < NUM_F)
@@ -143,58 +145,129 @@ void		draw_flame(t_fractal *fra)
 			}
 			else if (fra->flame_p == 5)
 			{
-				
+				//variation 5: Polar
+				r = sqrt(x * x + y * y);
+				theta = atan2(y, x);
+				p_x = theta / M_PI;
+				p_y = r - 1;				
 			}
 			else if (fra->flame_p == 6)
 			{
-				
+				//variation 6: Handkerchief
+				r = sqrt(x * x + y * y);
+				theta = atan2(y, x);
+				p_x = r * sin(theta + r);
+				p_y = r * cos(theta - r);				
 			}
 			else if (fra->flame_p == 7)
 			{
+				//variation 7: Heart
+				r = sqrt(x * x + y * y);
+				theta = atan2(y, x);
+				p_x = r * sin(theta * r);
+				p_y = -1 * r * cos(theta * r);
 				
 			}
 			else if (fra->flame_p == 8)
 			{
-				
+				//variation 8: Disc
+				r = sqrt(x * x + y * y);
+				theta = atan2(y, x);
+				p_x = theta / M_PI * sin(M_PI * r);
+				p_y = theta / M_PI * cos(M_PI * r);
 			}
 			else if (fra->flame_p == 9)
 			{
-				
+				//variation 9: Spiral
+				r = sqrt(x * x + y * y);
+				theta = atan2(y, x);
+				p_x = 1 / r * (cos(theta) + sin(r)); 
+				p_x = 1 / y * (sin(theta) - cos(r)); 
 			}
 			else if (fra->flame_p == 10)
 			{
+				//variation 10: Hyperbolic
+				r = sqrt(x * x + y * y);
+				theta = atan2(y, x);
+				p_x = sin(theta) / r;
+				p_y = r * cos(theta);
 				
 			}
 			else if (fra->flame_p == 11)
 			{
-				
+				//variation 11: Diamond
+				r = sqrt(x * x + y * y);
+				theta = atan2(y, x);
+				p_x = sin(theta) * cos(r);
+				p_y = cos(theta) * sin(r);
 			}
 			else if (fra->flame_p == 12)
 			{
-				
+				//variation 12: Ex
+				r = sqrt(x * x + y * y);
+				theta = atan2(y, x);
+				p0 = sin (theta + r);
+				p1 = cos (theta - r);
+
+				p_x = r * (p0 * p0 * p0 + p1 * p1 * p1);
+				p_y = r * (p0 * p0 * p0 - p1 * p1 * p1);			
 			}
 			else if (fra->flame_p == 13)
 			{
-				
+				//variation 13: Julia
+				r = sqrt(x * x + y * y);
+				theta = atan2(y, x);
+				p_x = sqrt (r) * cos (theta / 2);
+				p_y = sqrt (r) * sin (theta / 2);				
 			}
 			else if (fra->flame_p == 14)
 			{
-				
+				//variation 14: Bent
+				if (x >= 0 && y >= 0)
+				{
+					p_x = x;
+					p_y = y;
+				}
+				else if (x < 0 && y >= 0)
+				{
+					p_x = 2 * x;
+					p_y = y;
+				}
+				else if (x >= 0 && y < 0)
+				{
+					p_x = x;
+					p_y = y / 2;
+				}
+				else if (x< 0 , y < 0)
+				{
+					p_x = 2 * x;
+					p_y = y / 2;
+				}				
 			}
 			else if (fra->flame_p == 15)
 			{
-				
+				//variation 15: Bent
+				p_x = x + flame_co[rand_f].b * sin(y / (flame_co[rand_f].c * flame_co[rand_f].c));
+				p_y = y + flame_co[rand_f].e * sin(y / (flame_co[rand_f].f * flame_co[rand_f].f));
 			}
 			else if (fra->flame_p == 16)
 			{
-				
+				//variation 16: Fisheye
+				r = sqrt(x * x + y * y);
+				p_x = 2 / (r + 1) * y;
+				p_y = 2 / (r + 1) * x;
 			}
 			else if (fra->flame_p == 17)
 			{
+				//variation 17: Popcorn
+				p_x = x + flame_co[rand_f].c * sin (tan (3 * y));
+				p_y = y + flame_co[rand_f].f * sin (tan (3 * x));
 				
 			}
 			else if (fra->flame_p == 18)
 			{
+				//variation 18: Exponential
+				p_x = exp (x - 1) * cos (M_PI * )
 				
 			}
 			else if (fra->flame_p == 19)
@@ -422,5 +495,6 @@ void flame_pattern(int key, t_combi *combi)
 	combi->fra->flame_p++;
 	if (combi->fra->flame_p >= 48)
 		combi->fra->flame_p = 0;
-	printf("flame_p = %d", combi->fra->flame_p);	
+	fractal_redraw(combi);
+	printf("flame_p = %d\n", combi->fra->flame_p);	
 }
