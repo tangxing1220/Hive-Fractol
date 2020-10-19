@@ -34,6 +34,7 @@ void		draw_flame(t_fractal *fra)
 	int				i;
 	int				rand_f;
 	double			r;
+	double			r2;
 	double			theta;
 	double			theta2;
 	int				temp;
@@ -57,8 +58,8 @@ void		draw_flame(t_fractal *fra)
 	plain->max.im = 1.0;
 	plain->min.re = -1.777;
 	plain->min.im = -1.0;
-	iteration = 1000;
-	samples = 1000000;
+	iteration = 800;
+	samples = 1000;
 	srand((unsigned)time(&t));
 	i = 0;
 	while (i < NUM_F)
@@ -106,6 +107,217 @@ void		draw_flame(t_fractal *fra)
 			theta = atan2(y, x);
 			p_x = r * sin(theta * r);
 			p_y = -r * cos(theta * r);
+
+			if (fra->flame_p == 0)
+			{
+				// Variation 0: Linear
+				p_x = x;
+				p_y = y;
+			}
+			else if (fra->flame_p == 1)
+			{
+				// variation 1: Sinusoidal
+				p_x = sin(x);
+				p_y = sin(y);
+			}
+			else if (fra->flame_p == 2)
+			{
+				//variation 2: Spherical
+				r2= x * x + y * y;
+				p_x = 1.0 / r2 * x;
+				p_y = 1.0 / r2 * y;				
+			}
+			else if (fra->flame_p == 3)
+			{
+				//variation 3: Swirl
+				r2= x * x + y * y;
+				p_x = x * sin(r2) - y * cos(r2);
+				p_y = x * cos(r2) - y * sin(r2);				
+			}
+			else if (fra->flame_p == 4)
+			{
+				//variation 4: Horseshoe
+				r = sqrt(x * x + y * y);
+				p_x = (1.0 / r) * (x - y) * (x + y);
+				p_y = 2.0 / r * x * y;
+			}
+			else if (fra->flame_p == 5)
+			{
+				
+			}
+			else if (fra->flame_p == 6)
+			{
+				
+			}
+			else if (fra->flame_p == 7)
+			{
+				
+			}
+			else if (fra->flame_p == 8)
+			{
+				
+			}
+			else if (fra->flame_p == 9)
+			{
+				
+			}
+			else if (fra->flame_p == 10)
+			{
+				
+			}
+			else if (fra->flame_p == 11)
+			{
+				
+			}
+			else if (fra->flame_p == 12)
+			{
+				
+			}
+			else if (fra->flame_p == 13)
+			{
+				
+			}
+			else if (fra->flame_p == 14)
+			{
+				
+			}
+			else if (fra->flame_p == 15)
+			{
+				
+			}
+			else if (fra->flame_p == 16)
+			{
+				
+			}
+			else if (fra->flame_p == 17)
+			{
+				
+			}
+			else if (fra->flame_p == 18)
+			{
+				
+			}
+			else if (fra->flame_p == 19)
+			{
+				
+			}
+			else if (fra->flame_p == 20)
+			{
+				
+			}
+			else if (fra->flame_p == 21)
+			{
+				
+			}
+			else if (fra->flame_p == 22)
+			{
+				
+			}
+			else if (fra->flame_p == 23)
+			{
+				
+			}
+			else if (fra->flame_p == 24)
+			{
+				
+			}
+			else if (fra->flame_p == 25)
+			{
+				
+			}
+			else if (fra->flame_p == 26)
+			{
+				
+			}
+			else if (fra->flame_p == 27)
+			{
+				
+			}
+			else if (fra->flame_p == 28)
+			{
+				
+			}
+			else if (fra->flame_p == 29)
+			{
+				
+			}
+			else if (fra->flame_p == 30)
+			{
+				
+			}
+			else if (fra->flame_p == 31)
+			{
+				
+			}
+			else if (fra->flame_p == 32)
+			{
+				
+			}
+			else if (fra->flame_p == 33)
+			{
+				
+			}
+			else if (fra->flame_p == 34)
+			{
+				
+			}
+			else if (fra->flame_p == 35)
+			{
+				
+			}
+			else if (fra->flame_p == 36)
+			{
+				
+			}
+			else if (fra->flame_p == 37)
+			{
+				
+			}
+			else if (fra->flame_p == 38)
+			{
+				
+			}
+			else if (fra->flame_p == 39)
+			{
+				
+			}
+			else if (fra->flame_p == 40)
+			{
+				
+			}
+			else if (fra->flame_p == 41)
+			{
+				
+			}
+			else if (fra->flame_p == 42)
+			{
+				
+			}
+			else if (fra->flame_p == 43)
+			{
+				
+			}
+			else if (fra->flame_p == 44)
+			{
+				
+			}
+			else if (fra->flame_p == 45)
+			{
+				
+			}
+			else if (fra->flame_p == 46)
+			{
+				
+			}
+			else if (fra->flame_p == 47)
+			{
+				
+			}
+			else if (fra->flame_p == 48)
+			{
+				
+			}
+
 			/* case 8: Disk */
 //			r = sqrt(x * x + y * y) * M_PI;
 //			theta = atan2(y, x) / M_PI;
@@ -203,4 +415,12 @@ void		draw_flame(t_fractal *fra)
 		}
 		row++;
 	}
+}
+
+void flame_pattern(int key, t_combi *combi)
+{
+	combi->fra->flame_p++;
+	if (combi->fra->flame_p >= 48)
+		combi->fra->flame_p = 0;
+	printf("flame_p = %d", combi->fra->flame_p);	
 }

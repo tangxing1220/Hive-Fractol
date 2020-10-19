@@ -39,6 +39,7 @@
 # define MAIN_M				46
 # define MAIN_MINUS			27
 # define MAIN_PLUS			24
+# define MAIN_SPC			49           
 
 # define ARROW_LEFT			123
 # define ARROW_RIGHT		124
@@ -66,6 +67,7 @@ typedef struct	s_fractal
 	double		zoom;
 	int			choose_color;
 	int			maxiterate;
+	int			flame_p;
 }				t_fractal;
 
 typedef struct	s_complex
@@ -144,6 +146,7 @@ int				assign_color(double newre, double newim, int i,\
 								t_fractal *fra);
 void			change_color(t_fractal *fra, t_mouse *mouse);
 void			color_pattern(int key, t_combi *combi);
+void			flame_pattern(int key, t_combi *combi);
 
 void			fractal_controls(t_combi *combi);
 void			fractal_move(int key, t_combi *combi);
