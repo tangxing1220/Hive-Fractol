@@ -45,6 +45,7 @@ void	fractal_init(t_fractal **fra, char *name, t_mouse **mouse)
 	(*fra)->choose_color = 1;
 	(*fra)->maxiterate = 45;
 	(*fra)->name = name;
+	(*fra)->flame_p = 0;
 }
 
 void	combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse)

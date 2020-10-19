@@ -20,6 +20,10 @@ void	fractal_redraw(t_combi *combi)
 		draw_mandelbrot(combi->fra);
 	else if (ft_strcmp(combi->fra->name, "burningship") == 0)
 		draw_burningship(combi->fra);
+	else if (ft_strcmp(combi->fra->name, "chaosgame") == 0)
+		draw_chaosgame(combi->fra);
+	else if (ft_strcmp(combi->fra->name, "flame") == 0)
+		draw_flame(combi->fra);
 	mlx_put_image_to_window(combi->fra->mlx_ptr,\
 				combi->fra->win_ptr, combi->fra->img_ptr, 0, 0);
 	show_str_in_image(combi->fra);
