@@ -36,7 +36,7 @@ int		keyboard_key_press(int key, void *param)
 	if (key == MAIN_1 || key == MAIN_2 || key == MAIN_3 ||
 		key == MAIN_4 || key == MAIN_5 || key == MAIN_6 || key == MAIN_7)
 		color_pattern(key, combi);
-	if (key == MAIN_SPC)
+	if (key == MAIN_SPC || key == MAIN_MINUS || key == MAIN_PLUS)
 		flame_pattern(key, combi);
 	return (0);
 }

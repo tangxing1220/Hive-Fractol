@@ -6,7 +6,7 @@
 /*   By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 12:00:23 by xtang             #+#    #+#             */
-/*   Updated: 2020/10/20 19:38:23 by xtang            ###   ########.fr       */
+/*   Updated: 2020/10/20 22:06:59 by xtang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ char	*get_fractal_name(char *str)
 
 void	fractal_init(t_fractal **fra, char *name, t_mouse **mouse)
 {
+	int w;
+	int h;
+	int i;
+
 	(*mouse) = (t_mouse *)malloc(sizeof(t_mouse));
 	(*mouse)->mouse_x = 0.0;
 	(*mouse)->mouse_y = 0.0;
@@ -39,6 +43,22 @@ void	fractal_init(t_fractal **fra, char *name, t_mouse **mouse)
 	(*fra)->data_addr = mlx_get_data_addr((*fra)->img_ptr, \
 				&((*fra)->bits_per_pixel), &((*fra)->size_line),\
 						&((*fra)->endian));
+	i = 0;
+	h = 0;
+	while (h < HEIGHT)
+	{
+		w = 0;
+		while (w < WIDTH)
+		{
+			i = w * (*fra)->bits_per_pixel / 8 + h * (*fra)->size_line;
+			(*fra)->data_addr[i] = 0;
+			(*fra)->data_addr[++i] = 0;
+			(*fra)->data_addr[++i] = 0;
+			(*fra)->data_addr[++i] = 0;
+			w++;
+		}
+		h++;
+	}
 	(*fra)->offset_x = 0;
 	(*fra)->offset_y = 0;
 	(*fra)->zoom = 1;
@@ -53,8 +73,7 @@ void	combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse)
 	*combi = (t_combi *)malloc(sizeof(t_combi));
 	(*combi)->fra = fra;
 	(*combi)->mouse = mouse;
-	if (ft_strcmp(fra->name, "chaosgame") != 0 &&\
-							ft_strcmp(fra->name, "flame") != 0)
+	if (ft_strcmp(fra->name, "chaosgame") != 0)
 		show_str_in_image(fra);
 }
 
