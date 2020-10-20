@@ -39,7 +39,7 @@
 # define MAIN_M				46
 # define MAIN_MINUS			27
 # define MAIN_PLUS			24
-# define MAIN_SPC			49           
+# define MAIN_SPC			49
 
 # define ARROW_LEFT			123
 # define ARROW_RIGHT		124
@@ -152,5 +152,6 @@ void			fractal_controls(t_combi *combi);
 void			fractal_move(int key, t_combi *combi);
 void			fractal_zoom(int button, t_combi *combi);
 void			fractal_reset(t_combi *combi);
+void			fractal_redraw(t_combi *combi);
 
 #endif
