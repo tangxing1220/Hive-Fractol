@@ -6,7 +6,7 @@
 /*   By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 17:37:58 by xtang             #+#    #+#             */
-/*   Updated: 2020/10/20 19:35:23 by xtang            ###   ########.fr       */
+/*   Updated: 2020/10/20 22:08:33 by xtang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,24 +81,12 @@ void		draw_flame(t_fractal *fra)
 		flame_co[i].blue = (int)(drand48() * 256);
 		i++;
 	}
-/*
-**	i = 0;
-**	while (i < NUM_F)
-**	{
-**		printf("%d :", i);
-**		printf("%f, %f, %f, %f, %f, %f, %d, %d, %d\n",
-**			flame_co[i].a,flame_co[i].b,flame_co[i].c,
-**			flame_co[i].d,flame_co[i].e,flame_co[i].f,
-**			flame_co[i].red, flame_co[i].green, flame_co[i].blue);
-**		i++;
-**	}
-*/
-	s_i = 0;
+	s_i = -20;
 	while (s_i < samples)
 	{
 		p_x = plain->min.re + drand48() * (plain->max.re - plain->min.re);
 		p_y = plain->min.im + drand48() * (plain->max.im - plain->min.im);
-		i_i = -20;
+		i_i = 0;
 		while (i_i < iteration)
 		{
 			rand_f = rand() % NUM_F;
@@ -132,20 +120,13 @@ void		draw_flame(t_fractal *fra)
 			}
 			else if (fra->flame_p == 4)
 			{
-				// Variation 4: Horseshoe
-				r = 1.0 / sqrt(x * x + y * y);
-				p_x = r * (x - y) * (x + y);
-				p_y = r * 2.0 * x * y;
-			}
-			else if (fra->flame_p == 5)
-			{
 				// Variation 5: Polar
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p_x = theta / M_PI;
 				p_y = r - 1;
 			}
-			else if (fra->flame_p == 6)
+			else if (fra->flame_p == 5)
 			{
 				// Variation 6: Handkerchief
 				r = sqrt(x * x + y * y);
@@ -153,7 +134,7 @@ void		draw_flame(t_fractal *fra)
 				p_x = r * sin(theta + r);
 				p_y = r * cos(theta - r);
 			}
-			else if (fra->flame_p == 7)
+			else if (fra->flame_p == 6)
 			{
 				// Variation 7: Heart
 				r = sqrt(x * x + y * y);
@@ -161,7 +142,7 @@ void		draw_flame(t_fractal *fra)
 				p_x = r * sin(theta * r);
 				p_y = -1 * r * cos(theta * r);
 			}
-			else if (fra->flame_p == 8)
+			else if (fra->flame_p == 7)
 			{
 				// Variation 8: Disc
 				r = sqrt(x * x + y * y);
@@ -169,7 +150,7 @@ void		draw_flame(t_fractal *fra)
 				p_x = theta / M_PI * sin(M_PI * r);
 				p_y = theta / M_PI * cos(M_PI * r);
 			}
-			else if (fra->flame_p == 9)
+			else if (fra->flame_p == 8)
 			{
 				// Variation 9: Spiral
 				r = sqrt(x * x + y * y);
@@ -177,7 +158,7 @@ void		draw_flame(t_fractal *fra)
 				p_x = 1 / r * (cos(theta) + sin(r));
 				p_x = 1 / y * (sin(theta) - cos(r));
 			}
-			else if (fra->flame_p == 10)
+			else if (fra->flame_p == 9)
 			{
 				// Variation 10: Hyperbolic
 				r = sqrt(x * x + y * y);
@@ -185,7 +166,7 @@ void		draw_flame(t_fractal *fra)
 				p_x = sin(theta) / r;
 				p_y = r * cos(theta);
 			}
-			else if (fra->flame_p == 11)
+			else if (fra->flame_p == 10)
 			{
 				// Variation 11: Diamond
 				r = sqrt(x * x + y * y);
@@ -193,7 +174,7 @@ void		draw_flame(t_fractal *fra)
 				p_x = sin(theta) * cos(r);
 				p_y = cos(theta) * sin(r);
 			}
-			else if (fra->flame_p == 12)
+			else if (fra->flame_p == 11)
 			{
 				// Variation 12: Ex
 				r = sqrt(x * x + y * y);
@@ -203,7 +184,7 @@ void		draw_flame(t_fractal *fra)
 				p_x = r * (p0 * p0 * p0 + p1 * p1 * p1);
 				p_y = r * (p0 * p0 * p0 - p1 * p1 * p1);
 			}
-			else if (fra->flame_p == 13)
+			else if (fra->flame_p == 12)
 			{
 				// Variation 13: Julia
 				r = sqrt(x * x + y * y);
@@ -211,7 +192,7 @@ void		draw_flame(t_fractal *fra)
 				p_x = sqrt(r) * cos(theta / 2);
 				p_y = sqrt(r) * sin(theta / 2);
 			}
-			else if (fra->flame_p == 14)
+			else if (fra->flame_p == 13)
 			{
 				// Variation 14: Bent
 				if (x >= 0.0 && y >= 0.0)
@@ -227,40 +208,40 @@ void		draw_flame(t_fractal *fra)
 				else if (x >= 0.0 && y < 0.0)
 				{
 					p_x = x;
-					p_y = y / 2.0;
+					p_y = y * 0.5;
 				}
 				else if (x < 0.0 && y < 0.0)
 				{
 					p_x = 2.0 * x;
-					p_y = y / 2.0;
+					p_y = y * 0.5;
 				}
 			}
-			else if (fra->flame_p == 15)
+			else if (fra->flame_p == 14)
 			{
 				// Variation 15: Waves
 				p_x = x + flame_co[rand_f].b * sin(y / (flame_co[rand_f].c * flame_co[rand_f].c));
-				p_y = y + flame_co[rand_f].e * sin(y / (flame_co[rand_f].f * flame_co[rand_f].f));
+				p_y = y + flame_co[rand_f].e * sin(x / (flame_co[rand_f].f * flame_co[rand_f].f));
 			}
-			else if (fra->flame_p == 16)
+			else if (fra->flame_p == 15)
 			{
 				// Variation 16: Fisheye
 				r = sqrt(x * x + y * y);
 				p_x = 2 / (r + 1) * y;
 				p_y = 2 / (r + 1) * x;
 			}
-			else if (fra->flame_p == 17)
+			else if (fra->flame_p == 16)
 			{
 				// Variation 17: Popcorn
 				p_x = x + flame_co[rand_f].c * sin(tan(3 * y));
 				p_y = y + flame_co[rand_f].f * sin(tan(3 * x));
 			}
-			else if (fra->flame_p == 18)
+			else if (fra->flame_p == 17)
 			{
 				// Variation 18: Exponential
 				p_x = exp(x - 1) * cos(M_PI * y);
 				p_y = exp(x - 1) * sin(M_PI * y);
 			}
-			else if (fra->flame_p == 19)
+			else if (fra->flame_p == 18)
 			{
 				// Variation 19: Power
 				r = sqrt(x * x + y * y);
@@ -268,39 +249,39 @@ void		draw_flame(t_fractal *fra)
 				p_x = pow(r, sin(theta)) * cos(theta);
 				p_y = pow(r, sin(theta)) * sin(theta);
 			}
-			else if (fra->flame_p == 20)
+			else if (fra->flame_p == 19)
 			{
 				// Variation 20: Cosine
 				p_x = cos(M_PI * x) * cosh(y);
 				p_y = -1 * sin(M_PI * x) * sinh(y);
 			}
-			else if (fra->flame_p == 21)
+			else if (fra->flame_p == 20)
 			{
 				// Variation 27: Eyefish
 				r = sqrt(x * x + y * y);
 				p_x = 2 / (r + 1) * x;
 				p_y = 2 / (r + 1) * y;
 			}
-			else if (fra->flame_p == 22)
+			else if (fra->flame_p == 21)
 			{
 				// Variation 28: Bubble
 				r2 = x * x + y * y;
 				p_x = 4 / (r2 + 4) * x;
 				p_y = 4 / (r2 + 4) * y;
 			}
-			else if (fra->flame_p == 23)
+			else if (fra->flame_p == 22)
 			{
 				// Variation 29: Cylinder
 				p_x = sin(x);
 				p_y = y;
 			}
-			else if (fra->flame_p == 24)
+			else if (fra->flame_p == 23)
 			{
 				// Variation 42: Tangent
 				p_x = sin(x) / cos(y);
 				p_y = tan(y);
 			}
-			else if (fra->flame_p == 25)
+			else if (fra->flame_p == 24)
 			{
 				// Variation 48: Cross
 				p_x = x / (x * x - y * y);
@@ -364,7 +345,6 @@ void		draw_flame(t_fractal *fra)
 	}
 	gamma = 2.2;
 	row = 0;
-	col = 0;
 	while (row < HEIGHT)
 	{
 		col = 0;
@@ -379,7 +359,6 @@ void		draw_flame(t_fractal *fra)
 		row++;
 	}
 	row = 0;
-	col = 0;
 	while (row < HEIGHT)
 	{
 		col = 0;
@@ -395,11 +374,13 @@ void		draw_flame(t_fractal *fra)
 
 void	flame_pattern(int key, t_combi *combi)
 {
-	if (key == 49)
-	{
+	if (key == MAIN_SPC)
 		combi->fra->flame_p++;
-		if (combi->fra->flame_p > 25)
-			combi->fra->flame_p = 0;
-		fractal_redraw(combi);
-	}
+	else if (key == MAIN_PLUS)
+		combi->fra->flame_p++;
+	else if (key == MAIN_MINUS)
+		combi->fra->flame_p--;
+	if (combi->fra->flame_p > 24)
+		combi->fra->flame_p = 0;
+	fractal_redraw(combi);
 }

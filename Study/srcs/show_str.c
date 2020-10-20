@@ -25,61 +25,61 @@ void	show_str_in_image(t_fractal *fra)
 	if (ft_strcmp(fra->name, "flame") == 0)
 	{
 		if (fra->flame_p == 0)
-			tmp_str = "Variation 0: Linear";
+			tmp_str = "Variation_0 Linear";
 		else if (fra->flame_p == 1)
-			tmp_str = "Variation 1: Sinusoidal";
+			tmp_str = "Variation_1 Sinusoidal";
 		else if (fra->flame_p == 2)
-			tmp_str = "Variation 2: Spherical";
+			tmp_str = "Variation_2 Spherical";
 		else if (fra->flame_p == 3)
-			tmp_str = "Variation 3: Swirl";
+			tmp_str = "Variation_3 Swirl";
 		else if (fra->flame_p == 4)
-			tmp_str = "Variation 4: Horseshoe";
+			tmp_str = "Variation_5 Polar";
 		else if (fra->flame_p == 5)
-			tmp_str = "Variation 5: Polar";
+			tmp_str = "Variation_6 Handkerchief";
 		else if (fra->flame_p == 6)
-			tmp_str = "Variation 6: Handkerchief";
+			tmp_str = "Variation_7 Heart";
 		else if (fra->flame_p == 7)
-			tmp_str = "Variation 7: Heart";
+			tmp_str = "Variation_8 Disc";
 		else if (fra->flame_p == 8)
-			tmp_str = "Variation 8: Disc";
+			tmp_str = "Variation_9 Spiral";
 		else if (fra->flame_p == 9)
-			tmp_str = "Variation 9: Spiral";
+			tmp_str = "Variation_10 Hyperbolic";
 		else if (fra->flame_p == 10)
-			tmp_str = "Variation 10: Hyperbolic";
+			tmp_str = "Variation_11 Diamond";
 		else if (fra->flame_p == 11)
-			tmp_str = "Variation 11: Diamond";
+			tmp_str = "Variation_12 Ex";
 		else if (fra->flame_p == 12)
-			tmp_str = "Variation 12: Ex";
+			tmp_str = "Variation_13 Julia";
 		else if (fra->flame_p == 13)
-			tmp_str = "Variation 13: Julia";
+			tmp_str = "Variation_14 Bent";
 		else if (fra->flame_p == 14)
-			tmp_str = "Variation 14: Bent";
+			tmp_str = "Variation_15 Waves";
 		else if (fra->flame_p == 15)
-			tmp_str = "Variation 15: Waves";
+			tmp_str = "Variation_16 Fisheye";
 		else if (fra->flame_p == 16)
-			tmp_str = "Variation 16: Fisheye";
+			tmp_str = "Variation_17 Popcorn";
 		else if (fra->flame_p == 17)
-			tmp_str = "Variation 17: Popcorn";
+			tmp_str = "Variation_18 Exponential";
 		else if (fra->flame_p == 18)
-			tmp_str = "Variation 18: Exponential";
+			tmp_str = "Variation_19 Power";
 		else if (fra->flame_p == 19)
-			tmp_str = "Variation 19: Power";
+			tmp_str = "Variation_20 Cosine";
 		else if (fra->flame_p == 20)
-			tmp_str = "Variation 20: Cosine";
+			tmp_str = "Variation_27 Eyefish";
 		else if (fra->flame_p == 21)
-			tmp_str = "Variation 27: Eyefish";
+			tmp_str = "Variation_28 Bubble";
 		else if (fra->flame_p == 22)
-			tmp_str = "Variation 28: Bubble";
+			tmp_str = "Variation_29 Cylinder";
 		else if (fra->flame_p == 23)
-			tmp_str = "Variation 29: Cylinder";
+			tmp_str = "Variation_42 Tangent";
 		else if (fra->flame_p == 24)
-			tmp_str = "Variation 42: Tangent";
-		else if (fra->flame_p == 25)
-			tmp_str = "Variation 48: Cross";
+			tmp_str = "Variation_48 Cross";
 		else
 			tmp_str = "";
-		mlx_string_put(mlx, win, 15, y = 20, TXT_COL, tmp_str);
-		mlx_string_put(mlx, win, 15, y = 40, TXT_COL, "(Press space bar to change variation)");
+		mlx_string_put(mlx, win, 15, y = 20, TXT_COL, "No: ");
+		mlx_string_put(mlx, win, 50, y = 20, TXT_COL, ft_itoa(fra->flame_p));
+		mlx_string_put(mlx, win, 15, y = 40, TXT_COL, tmp_str);
+		mlx_string_put(mlx, win, WIDTH - 360, HEIGHT - 30, TXT_COL, "('Space':Change'+':Next'-':Last)");
 	}
 	else
 	{
