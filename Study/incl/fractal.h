@@ -20,7 +20,7 @@
 # include "mlx.h"
 # include <stdio.h>
 
-# define THREAD_NB			64
+# define THREAD_NB			10
 # define TXT_COL			0xFFFFFF
 
 # define WIDTH				1920
@@ -49,8 +49,8 @@
 # define M_SCROLL_UP		4
 # define M_SCROLL_DOWN		5
 
-# define SEED				5
 # define NUM_F				6
+# define FLAME_SAMPLE		100000
 
 typedef struct	s_fractal
 {
@@ -68,6 +68,7 @@ typedef struct	s_fractal
 	int			choose_color;
 	int			maxiterate;
 	int			flame_p;
+	int			chaosgame_seed;
 }				t_fractal;
 
 typedef struct	s_complex
@@ -102,6 +103,7 @@ typedef struct	s_multi_th
 	t_fractal	*fra;
 	t_mouse		*mouse;
 	int			th_height;
+	int			th_sample;
 }				t_multi_th;
 
 typedef struct	s_flame_co
@@ -147,6 +149,7 @@ int				assign_color(double newre, double newim, int i,\
 void			change_color(t_fractal *fra, t_mouse *mouse);
 void			color_pattern(int key, t_combi *combi);
 void			flame_pattern(int key, t_combi *combi);
+void			chaosgame_pattern(int key, t_combi *combi);
 
 void			fractal_controls(t_combi *combi);
 void			fractal_move(int key, t_combi *combi);

@@ -66,6 +66,7 @@ void	fractal_init(t_fractal **fra, char *name, t_mouse **mouse)
 	(*fra)->maxiterate = 45;
 	(*fra)->name = name;
 	(*fra)->flame_p = 0;
+	(*fra)->chaosgame_seed = 5;
 }
 
 void	combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse)
@@ -73,8 +74,7 @@ void	combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse)
 	*combi = (t_combi *)malloc(sizeof(t_combi));
 	(*combi)->fra = fra;
 	(*combi)->mouse = mouse;
-	if (ft_strcmp(fra->name, "chaosgame") != 0)
-		show_str_in_image(fra);
+	show_str_in_image(fra);
 }
 
 void	print_usage(void)

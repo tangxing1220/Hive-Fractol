@@ -6,7 +6,7 @@
 /*   By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 19:19:20 by xtang             #+#    #+#             */
-/*   Updated: 2020/08/27 19:39:30 by xtang            ###   ########.fr       */
+/*   Updated: 2020/10/21 16:34:59 by xtang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ int		keyboard_key_press(int key, void *param)
 		fractal_move(key, combi);
 	if (key == MAIN_R)
 		fractal_reset(combi);
-	if (key == MAIN_MINUS || key == MAIN_PLUS)
-		iteration_change(key, combi);
+	if (ft_strcmp(combi->fra->name, "chaosgame") != 0)
+	{
+		if (key == MAIN_MINUS || key == MAIN_PLUS)
+			iteration_change(key, combi);
+	}
 	if (key == MAIN_M)
 	{
 		if (combi->mouse->mouse_disable == 1)
@@ -36,8 +39,16 @@ int		keyboard_key_press(int key, void *param)
 	if (key == MAIN_1 || key == MAIN_2 || key == MAIN_3 ||
 		key == MAIN_4 || key == MAIN_5 || key == MAIN_6 || key == MAIN_7)
 		color_pattern(key, combi);
-	if (key == MAIN_SPC || key == MAIN_MINUS || key == MAIN_PLUS)
-		flame_pattern(key, combi);
+	if (ft_strcmp(combi->fra->name, "flame") == 0)
+	{
+		if (key == MAIN_SPC || key == MAIN_MINUS || key == MAIN_PLUS)
+			flame_pattern(key, combi);
+	}
+	if (ft_strcmp(combi->fra->name, "chaosgame") == 0)
+	{
+		if (key == MAIN_MINUS || key == MAIN_PLUS)
+			chaosgame_pattern(key, combi);
+	}
 	return (0);
 }
 
