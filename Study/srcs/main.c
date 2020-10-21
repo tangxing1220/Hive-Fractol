@@ -26,12 +26,35 @@ char	*get_fractal_name(char *str)
 	}
 }
 
+void	clean_screen(t_fractal *fra)
+{
+	int i;
+	int h;
+	int w;
+
+	i = 0;
+	h = 0;
+	while (h < HEIGHT)
+	{
+		w = 0;
+		while (w < WIDTH)
+		{
+			i = w * fra->bits_per_pixel / 8 + h * fra->size_line;
+			fra->data_addr[i] = 0;
+			fra->data_addr[++i] = 0;
+			fra->data_addr[++i] = 0;
+			fra->data_addr[++i] = 0;
+			w++;
+		}
+		h++;
+	}
+}
+
 void	fractal_init(t_fractal **fra, char *name, t_mouse **mouse)
 {
-	int w;
-	int h;
-	int i;
+	t_combi		*combi;
 
+	combi = NULL;
 	(*mouse) = (t_mouse *)malloc(sizeof(t_mouse));
 	(*mouse)->mouse_x = 0.0;
 	(*mouse)->mouse_y = 0.0;
@@ -43,22 +66,6 @@ void	fractal_init(t_fractal **fra, char *name, t_mouse **mouse)
 	(*fra)->data_addr = mlx_get_data_addr((*fra)->img_ptr, \
 				&((*fra)->bits_per_pixel), &((*fra)->size_line),\
 						&((*fra)->endian));
-	i = 0;
-	h = 0;
-	while (h < HEIGHT)
-	{
-		w = 0;
-		while (w < WIDTH)
-		{
-			i = w * (*fra)->bits_per_pixel / 8 + h * (*fra)->size_line;
-			(*fra)->data_addr[i] = 0;
-			(*fra)->data_addr[++i] = 0;
-			(*fra)->data_addr[++i] = 0;
-			(*fra)->data_addr[++i] = 0;
-			w++;
-		}
-		h++;
-	}
 	(*fra)->offset_x = 0;
 	(*fra)->offset_y = 0;
 	(*fra)->zoom = 1;
@@ -67,11 +74,14 @@ void	fractal_init(t_fractal **fra, char *name, t_mouse **mouse)
 	(*fra)->name = name;
 	(*fra)->flame_p = 0;
 	(*fra)->chaosgame_seed = 5;
+	clean_screen(*fra);
+	combi_init(&combi, *fra, *mouse);
+	fractal_controls(combi);
 }
 
 void	combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse)
 {
-	*combi = (t_combi *)malloc(sizeof(t_combi));
+	(*combi) = (t_combi *)malloc(sizeof(t_combi));
 	(*combi)->fra = fra;
 	(*combi)->mouse = mouse;
 	show_str_in_image(fra);
@@ -90,7 +100,6 @@ int		main(int argc, char **argv)
 	char		*fra_name;
 	t_fractal	*fra;
 	t_mouse		*mouse;
-	t_combi		*combi;
 
 	if (argc == 2)
 	{
@@ -108,8 +117,6 @@ int		main(int argc, char **argv)
 		else if (ft_strcmp(fra->name, "flame") == 0)
 			draw_flame(fra);
 		mlx_put_image_to_window(fra->mlx_ptr, fra->win_ptr, fra->img_ptr, 0, 0);
-		combi_init(&combi, fra, mouse);
-		fractal_controls(combi);
 		mlx_loop(fra->mlx_ptr);
 	}
 	else
