@@ -12,23 +12,18 @@
 
 #include "../incl/fractal.h"
 
-int		keyboard_key_press(int key, void *param)
+void	key_julia_mandelbrot_burningship(int key, t_combi *combi)
 {
-	t_combi	*combi;
-
-	combi = (t_combi *)param;
-	if (key == MAIN_ESC)
-		exit(0);
 	if (key == ARROW_UP || key == ARROW_DOWN\
-			|| key == ARROW_LEFT || key == ARROW_RIGHT)
+				|| key == ARROW_LEFT || key == ARROW_RIGHT)
 		fractal_move(key, combi);
 	if (key == MAIN_R)
 		fractal_reset(combi);
-	if (ft_strcmp(combi->fra->name, "chaosgame") != 0)
-	{
-		if (key == MAIN_MINUS || key == MAIN_PLUS)
-			iteration_change(key, combi);
-	}
+	if (key == MAIN_MINUS || key == MAIN_PLUS)
+		iteration_change(key, combi);
+	if (key == MAIN_1 || key == MAIN_2 || key == MAIN_3 || key == MAIN_4\
+					|| key == MAIN_5 || key == MAIN_6 || key == MAIN_7)
+		color_pattern(key, combi);
 	if (key == MAIN_M)
 	{
 		if (combi->mouse->mouse_disable == 1)
@@ -36,19 +31,27 @@ int		keyboard_key_press(int key, void *param)
 		else
 			combi->mouse->mouse_disable = 1;
 	}
-	if (key == MAIN_1 || key == MAIN_2 || key == MAIN_3 ||
-		key == MAIN_4 || key == MAIN_5 || key == MAIN_6 || key == MAIN_7)
-		color_pattern(key, combi);
+}
+
+int		keyboard_key_press(int key, void *param)
+{
+	t_combi	*combi;
+
+	combi = (t_combi *)param;
+	if (key == MAIN_ESC)
+		exit(0);
 	if (ft_strcmp(combi->fra->name, "flame") == 0)
 	{
 		if (key == MAIN_SPC || key == MAIN_MINUS || key == MAIN_PLUS)
 			flame_pattern(key, combi);
 	}
-	if (ft_strcmp(combi->fra->name, "chaosgame") == 0)
+	else if (ft_strcmp(combi->fra->name, "chaosgame") == 0)
 	{
 		if (key == MAIN_MINUS || key == MAIN_PLUS)
 			chaosgame_pattern(key, combi);
 	}
+	else
+		key_julia_mandelbrot_burningship(key, combi);
 	return (0);
 }
 
