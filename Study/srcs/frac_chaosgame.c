@@ -12,69 +12,56 @@
 
 #include "../incl/fractal.h"
 
-void	draw_chaosgame(t_fractal *fra)
+void	draw_seed(t_fractal *fra, int *seed_x, int *seed_y)
 {
-	int		c_x;
-	int		c_y;
-	int		n_x;
-	int		n_y;
-	int		*s_x;
-	int		*s_y;
 	int		i;
-	int		j;
-	time_t	t;
-	int		r;
-	float	present;
+	int		num;
 	float	angle;
 	int		len;
-	int		h;
-	int		w;
 
-	i = 0;
-	h = 0;
-	while (h < HEIGHT)
-	{
-		w = 0;
-		while (w < WIDTH)
-		{
-			i = w * fra->bits_per_pixel / 8 + h * fra->size_line;
-			fra->data_addr[i] = 0;
-			fra->data_addr[++i] = 0;
-			fra->data_addr[++i] = 0;
-			fra->data_addr[++i] = 0;
-			w++;
-		}
-		h++;
-	}
-	s_x = (int *)malloc(sizeof(int) * fra->chaosgame_seed);
-	s_y = (int *)malloc(sizeof(int) * fra->chaosgame_seed);
-	present = 0.58;
-	srand((unsigned)time(&t));
-	c_x = WIDTH / 2;
-	c_y = HEIGHT / 2;
+	num = fra->chaosgame_seed;
 	len = (int)(HEIGHT / 2 * 0.60);
-	j = 0;
-	while (j < fra->chaosgame_seed)
-	{
-		angle = j * 2 * M_PI / fra->chaosgame_seed;
-		s_x[j] = WIDTH / 2 + len * cos(angle);
-		s_y[j] = HEIGHT / 2 + len * sin(angle);
-		draw_pixel(fra, s_x[j], s_y[j], 0xFF4500);
-		j++;
-	}
 	i = 0;
-	while (i < 100000)
+	while (i < num)
 	{
-		r = rand() % fra->chaosgame_seed;
-		n_x = s_x[r];
-		n_y = s_y[r];
-		c_x = c_x + (n_x - c_x) * present;
-		c_y = c_y + (n_y - c_y) * present;
-		draw_pixel(fra, c_x, c_y, 0xFFFF00);
+		angle = i * 2 * M_PI / num;
+		seed_x[i] = WIDTH / 2 + len * cos(angle);
+		seed_y[i] = HEIGHT / 2 + len * sin(angle);
+		draw_pixel(fra, seed_x[i], seed_y[i], 0xFF4500);
 		i++;
 	}
-	free(s_x);
-	free(s_y);
+}
+
+void	draw_samples(t_fractal *fra, int *seed_x, int *seed_y)
+{
+	int		i;
+	time_t	t;
+	int		random;
+	int		curr_x;
+	int		curr_y;
+
+	srand((unsigned)time(&t));
+	i = 0;
+	while (i < SAMPLES)
+	{
+		random = rand() % fra->chaosgame_seed;
+		curr_x = curr_x + (seed_x[random] - curr_x) * 0.58;
+		curr_y = curr_y + (seed_y[random] - curr_y) * 0.58;
+		draw_pixel(fra, curr_x, curr_y, 0xFFFF00);
+		i++;
+	}
+}
+
+void	draw_chaosgame(t_fractal *fra)
+{
+	int		s_num;
+	int		seed_x[fra->chaosgame_seed];
+	int		seed_y[fra->chaosgame_seed];
+
+	s_num = fra->chaosgame_seed;
+	clean_screen(fra);
+	draw_seed(fra, seed_x, seed_y);
+	draw_samples(fra, seed_x, seed_y);
 }
 
 void	chaosgame_pattern(int key, t_combi *combi)

@@ -50,7 +50,7 @@
 # define M_SCROLL_DOWN		5
 
 # define NUM_F				6
-# define FLAME_SAMPLE		100000
+# define SAMPLES			100000
 
 typedef struct	s_fractal
 {
@@ -132,6 +132,12 @@ typedef	struct	s_f_pixel
 	int				b;
 }				t_f_pixel;
 
+typedef	struct	s_seed
+{
+	int		x;
+	int		y;
+}				t_seed;
+
 void			combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse);
 void			iteration_change(int key, t_combi *combi);
 void			draw_pixel(t_fractal *fra, int x, int y, int col);
@@ -156,5 +162,6 @@ void			fractal_move(int key, t_combi *combi);
 void			fractal_zoom(int button, t_combi *combi);
 void			fractal_reset(t_combi *combi);
 void			fractal_redraw(t_combi *combi);
+void			clean_screen(t_fractal *fra);
 
 #endif

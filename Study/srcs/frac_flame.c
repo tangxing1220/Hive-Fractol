@@ -407,7 +407,7 @@ void	draw_flame(t_fractal *fra)
 	while (i < THREAD_NB)
 	{
 		th_id[i] = (t_multi_th *)malloc(sizeof(t_multi_th));
-		th_id[i]->th_sample = (int)(FLAME_SAMPLE / THREAD_NB);
+		th_id[i]->th_sample = (int)(SAMPLES / THREAD_NB);
 		th_id[i]->fra = fra;
 		pthread_create(&thread_id[i], NULL, draw_flame_thread, th_id[i]);
 		i++;
