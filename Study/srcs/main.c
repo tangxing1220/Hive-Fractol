@@ -72,7 +72,7 @@ void	fractal_init(t_fractal **fra, char *name, t_mouse **mouse)
 	(*fra)->choose_color = 1;
 	(*fra)->maxiterate = 45;
 	(*fra)->name = name;
-	(*fra)->flame_p = 0;
+	(*fra)->flame_p = 1;
 	(*fra)->chaosgame_seed = 5;
 	clean_screen(*fra);
 	combi_init(&combi, *fra, *mouse);

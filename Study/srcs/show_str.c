@@ -37,7 +37,7 @@ char	*flame_name_a(t_fractal *fra)
 	else
 		var_name = ft_strcpy(tmp_str, "");
 	free(tmp_str);
-	return (var_name);
+	return (tmp_str);
 }
 
 char	*flame_name_b(t_fractal *fra)
