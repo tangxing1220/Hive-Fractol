@@ -84,7 +84,6 @@ void	combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse)
 	(*combi) = (t_combi *)malloc(sizeof(t_combi));
 	(*combi)->fra = fra;
 	(*combi)->mouse = mouse;
-	show_str_in_image(fra);
 }
 
 void	print_usage(void)
@@ -93,6 +92,13 @@ void	print_usage(void)
 	ft_putstr_fd("./fractol [fractal type name]\n", STDERR_FILENO);
 	ft_putstr_fd("fractal type:\tjulia\t", STDERR_FILENO);
 	ft_putstr_fd("mandelbrot\tburningship\tchaosgame\tflame\n", STDERR_FILENO);
+}
+
+void	fractal_show(t_fractal *fra)
+{
+	mlx_put_image_to_window(fra->mlx_ptr, fra->win_ptr, fra->img_ptr, 0, 0);
+	show_str_in_image(fra);
+	mlx_loop(fra->mlx_ptr);
 }
 
 int		main(int argc, char **argv)
@@ -116,8 +122,7 @@ int		main(int argc, char **argv)
 			draw_chaosgame(fra);
 		else if (ft_strcmp(fra->name, "flame") == 0)
 			draw_flame(fra);
-		mlx_put_image_to_window(fra->mlx_ptr, fra->win_ptr, fra->img_ptr, 0, 0);
-		mlx_loop(fra->mlx_ptr);
+		fractal_show(fra);
 	}
 	else
 		print_usage();
