@@ -51,6 +51,9 @@
 
 # define NUM_F				6
 # define SAMPLES			100000
+# define FLAME_ITERATE		1500
+# define SYMMETRY			2
+# define GAMMA				2.2
 
 typedef struct	s_fractal
 {
@@ -114,10 +117,6 @@ typedef struct	s_flame_co
 	double	d;
 	double	e;
 	double	f;
-	double	pa1;
-	double	pa2;
-	double	pa3;
-	double	pa4;
 	int		red;
 	int		green;
 	int		blue;
