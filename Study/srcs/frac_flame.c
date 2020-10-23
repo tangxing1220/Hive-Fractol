@@ -507,6 +507,14 @@ void	*draw_flame_thread(void *th_temp)
 	max = pixel_log_density(f_pixel);
 	pixel_gamma_factor(f_pixel, max);
 	rendering_flame(f_pixel, th);
+	free(plain);
+	temp = 0;
+	while (temp < HEIGHT)
+	{
+		free(f_pixel[temp]);
+		temp++;
+	}
+	free(f_pixel);
 	return (NULL);
 }
 
