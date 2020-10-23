@@ -33,7 +33,7 @@ void	*draw_flame_thread(void *th_temp)
 	int				row;
 	int				col;
 	int				i;
-	int				rand_f;
+	int				r_f;
 	double			r;
 	double			r2;
 	double			theta;
@@ -43,7 +43,7 @@ void	*draw_flame_thread(void *th_temp)
 	int				symmetry;
 	time_t			t;
 	t_complex_plain	*plain;
-	t_flame_co		flame_co[NUM_F];
+	t_flame_co		f_co[NUM_F];
 	t_f_pixel		**f_pixel;
 	double			p0;
 	double			p1;
@@ -69,19 +69,19 @@ void	*draw_flame_thread(void *th_temp)
 	i = 0;
 	while (i < NUM_F)
 	{
-		flame_co[i].a = -1.5 + drand48() * (1.5 - (-1.5));
-		flame_co[i].b = -1.5 + drand48() * (1.5 - (-1.5));
-		flame_co[i].c = -1.5 + drand48() * (1.5 - (-1.5));
-		flame_co[i].d = -1.5 + drand48() * (1.5 - (-1.5));
-		flame_co[i].e = -1.5 + drand48() * (1.5 - (-1.5));
-		flame_co[i].f = -1.5 + drand48() * (1.5 - (-1.5));
-		flame_co[i].pa1 = -2.0 + drand48() * (2.0 - (-2.0));
-		flame_co[i].pa2 = -2.0 + drand48() * (2.0 - (-2.0));
-		flame_co[i].pa3 = -2.0 + drand48() * (2.0 - (-2.0));
-		flame_co[i].pa4 = -2.0 + drand48() * (2.0 - (-2.0));
-		flame_co[i].red = (int)(drand48() * 256);
-		flame_co[i].green = (int)(drand48() * 256);
-		flame_co[i].blue = (int)(drand48() * 256);
+		f_co[i].a = -1.5 + drand48() * (1.5 - (-1.5));
+		f_co[i].b = -1.5 + drand48() * (1.5 - (-1.5));
+		f_co[i].c = -1.5 + drand48() * (1.5 - (-1.5));
+		f_co[i].d = -1.5 + drand48() * (1.5 - (-1.5));
+		f_co[i].e = -1.5 + drand48() * (1.5 - (-1.5));
+		f_co[i].f = -1.5 + drand48() * (1.5 - (-1.5));
+		f_co[i].pa1 = -2.0 + drand48() * (2.0 - (-2.0));
+		f_co[i].pa2 = -2.0 + drand48() * (2.0 - (-2.0));
+		f_co[i].pa3 = -2.0 + drand48() * (2.0 - (-2.0));
+		f_co[i].pa4 = -2.0 + drand48() * (2.0 - (-2.0));
+		f_co[i].red = (int)(drand48() * 256);
+		f_co[i].green = (int)(drand48() * 256);
+		f_co[i].blue = (int)(drand48() * 256);
 		i++;
 	}
 	s_i = -20;
@@ -92,38 +92,33 @@ void	*draw_flame_thread(void *th_temp)
 		i_i = 0;
 		while (i_i < iteration)
 		{
-			rand_f = rand() % NUM_F;
-			x = flame_co[rand_f].a * p_x + flame_co[rand_f].b * p_y + flame_co[rand_f].c;
-			y = flame_co[rand_f].d * p_x + flame_co[rand_f].e * p_y + flame_co[rand_f].f;
+			r_f = rand() % NUM_F;
+			x = f_co[r_f].a * p_x + f_co[r_f].b * p_y + f_co[r_f].c;
+			y = f_co[r_f].d * p_x + f_co[r_f].e * p_y + f_co[r_f].f;
 			if (th->fra->flame_p == 0)
 			{
-				// Variation 0: Linear
 				p_x = x;
 				p_y = y;
 			}
 			else if (th->fra->flame_p == 1)
 			{
-				// Variation 1: Sinusoidal
 				p_x = sin(x);
 				p_y = sin(y);
 			}
 			else if (th->fra->flame_p == 2)
 			{
-				// Variation 2: Spherical
 				r2 = x * x + y * y;
 				p_x = 1.0 / r2 * x;
 				p_y = 1.0 / r2 * y;
 			}
 			else if (th->fra->flame_p == 3)
 			{
-				// Variation 3: Swirl
 				r2 = x * x + y * y;
 				p_x = x * sin(r2) - y * cos(r2);
 				p_y = x * cos(r2) - y * sin(r2);
 			}
 			else if (th->fra->flame_p == 4)
 			{
-				// Variation 5: Polar
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p_x = theta / M_PI;
@@ -131,7 +126,6 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 5)
 			{
-				// Variation 6: Handkerchief
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p_x = r * sin(theta + r);
@@ -139,7 +133,6 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 6)
 			{
-				// Variation 7: Heart
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p_x = r * sin(theta * r);
@@ -147,7 +140,6 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 7)
 			{
-				// Variation 8: Disc
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p_x = theta / M_PI * sin(M_PI * r);
@@ -155,7 +147,6 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 8)
 			{
-				// Variation 9: Spiral
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p_x = 1 / r * (cos(theta) + sin(r));
@@ -163,7 +154,6 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 9)
 			{
-				// Variation 10: Hyperbolic
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p_x = sin(theta) / r;
@@ -171,7 +161,6 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 10)
 			{
-				// Variation 11: Diamond
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p_x = sin(theta) * cos(r);
@@ -179,7 +168,6 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 11)
 			{
-				// Variation 12: Ex
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p0 = sin(theta + r);
@@ -189,7 +177,6 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 12)
 			{
-				// Variation 13: Julia
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p_x = sqrt(r) * cos(theta / 2);
@@ -197,7 +184,6 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 13)
 			{
-				// Variation 14: Bent
 				if (x >= 0.0 && y >= 0.0)
 				{
 					p_x = x;
@@ -221,32 +207,27 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 14)
 			{
-				// Variation 15: Waves
-				p_x = x + flame_co[rand_f].b * sin(y / (flame_co[rand_f].c * flame_co[rand_f].c));
-				p_y = y + flame_co[rand_f].e * sin(x / (flame_co[rand_f].f * flame_co[rand_f].f));
+				p_x = x + f_co[r_f].b * sin(y / (f_co[r_f].c * f_co[r_f].c));
+				p_y = y + f_co[r_f].e * sin(x / (f_co[r_f].f * f_co[r_f].f));
 			}
 			else if (th->fra->flame_p == 15)
 			{
-				// Variation 16: Fisheye
 				r = sqrt(x * x + y * y);
 				p_x = 2 / (r + 1) * y;
 				p_y = 2 / (r + 1) * x;
 			}
 			else if (th->fra->flame_p == 16)
 			{
-				// Variation 17: Popcorn
-				p_x = x + flame_co[rand_f].c * sin(tan(3 * y));
-				p_y = y + flame_co[rand_f].f * sin(tan(3 * x));
+				p_x = x + f_co[r_f].c * sin(tan(3 * y));
+				p_y = y + f_co[r_f].f * sin(tan(3 * x));
 			}
 			else if (th->fra->flame_p == 17)
 			{
-				// Variation 18: Exponential
 				p_x = exp(x - 1) * cos(M_PI * y);
 				p_y = exp(x - 1) * sin(M_PI * y);
 			}
 			else if (th->fra->flame_p == 18)
 			{
-				// Variation 19: Power
 				r = sqrt(x * x + y * y);
 				theta = atan2(y, x);
 				p_x = pow(r, sin(theta)) * cos(theta);
@@ -254,39 +235,33 @@ void	*draw_flame_thread(void *th_temp)
 			}
 			else if (th->fra->flame_p == 19)
 			{
-				// Variation 20: Cosine
 				p_x = cos(M_PI * x) * cosh(y);
 				p_y = -1 * sin(M_PI * x) * sinh(y);
 			}
 			else if (th->fra->flame_p == 20)
 			{
-				// Variation 27: Eyefish
 				r = sqrt(x * x + y * y);
 				p_x = 2 / (r + 1) * x;
 				p_y = 2 / (r + 1) * y;
 			}
 			else if (th->fra->flame_p == 21)
 			{
-				// Variation 28: Bubble
 				r2 = x * x + y * y;
 				p_x = 4 / (r2 + 4) * x;
 				p_y = 4 / (r2 + 4) * y;
 			}
 			else if (th->fra->flame_p == 22)
 			{
-				// Variation 29: Cylinder
 				p_x = sin(x);
 				p_y = y;
 			}
 			else if (th->fra->flame_p == 23)
 			{
-				// Variation 42: Tangent
 				p_x = sin(x) / cos(y);
 				p_y = tan(y);
 			}
 			else if (th->fra->flame_p == 24)
 			{
-				// Variation 48: Cross
 				p_x = x / (x * x - y * y);
 				p_y = y / (x * x - y * y);
 			}
@@ -308,15 +283,15 @@ void	*draw_flame_thread(void *th_temp)
 						{
 							if (f_pixel[scr_y][scr_x].counter == 0)
 							{
-								f_pixel[scr_y][scr_x].r = flame_co[rand_f].red;
-								f_pixel[scr_y][scr_x].g = flame_co[rand_f].green;
-								f_pixel[scr_y][scr_x].b = flame_co[rand_f].blue;
+								f_pixel[scr_y][scr_x].r = f_co[r_f].red;
+								f_pixel[scr_y][scr_x].g = f_co[r_f].green;
+								f_pixel[scr_y][scr_x].b = f_co[r_f].blue;
 							}
 							else
 							{
-								f_pixel[scr_y][scr_x].r = (f_pixel[scr_y][scr_x].r + flame_co[rand_f].red) / 2;
-								f_pixel[scr_y][scr_x].g = (f_pixel[scr_y][scr_x].g + flame_co[rand_f].green) / 2;
-								f_pixel[scr_y][scr_x].b = (f_pixel[scr_y][scr_x].b + flame_co[rand_f].blue) / 2;
+								f_pixel[scr_y][scr_x].r = (f_pixel[scr_y][scr_x].r + f_co[r_f].red) / 2;
+								f_pixel[scr_y][scr_x].g = (f_pixel[scr_y][scr_x].g + f_co[r_f].green) / 2;
+								f_pixel[scr_y][scr_x].b = (f_pixel[scr_y][scr_x].b + f_co[r_f].blue) / 2;
 							}
 							f_pixel[scr_y][scr_x].counter++;
 						}
