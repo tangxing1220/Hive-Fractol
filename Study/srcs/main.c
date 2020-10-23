@@ -6,7 +6,7 @@
 /*   By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 12:00:23 by xtang             #+#    #+#             */
-/*   Updated: 2020/10/20 22:06:59 by xtang            ###   ########.fr       */
+/*   Updated: 2020/10/23 11:00:19 by xtang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	fractal_init(t_fractal **fra, char *name, t_mouse **mouse)
 	(*fra)->choose_color = 1;
 	(*fra)->maxiterate = 45;
 	(*fra)->name = name;
-	(*fra)->flame_p = 1;
+	(*fra)->flame_p = 0;
 	(*fra)->chaosgame_seed = 5;
 	clean_screen(*fra);
 	combi_init(&combi, *fra, *mouse);
