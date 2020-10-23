@@ -14,113 +14,103 @@
 
 char	*flame_name_a(t_fractal *fra)
 {
-	char *var_name;
 	char *tmp_str;
 
 	tmp_str = (char *)malloc(sizeof(char) * 40);
 	if (fra->flame_p == 0)
-		var_name = ft_strcpy(tmp_str, "Variation_0 Linear");
+		ft_strcpy(tmp_str, "Variation_0 Linear");
 	else if (fra->flame_p == 1)
-		var_name = ft_strcpy(tmp_str, "Variation_1 Sinusoidal");
+		ft_strcpy(tmp_str, "Variation_1 Sinusoidal");
 	else if (fra->flame_p == 2)
-		var_name = ft_strcpy(tmp_str, "Variation_2 Spherical");
+		ft_strcpy(tmp_str, "Variation_2 Spherical");
 	else if (fra->flame_p == 3)
-		var_name = ft_strcpy(tmp_str, "Variation_3 Swirl");
+		ft_strcpy(tmp_str, "Variation_3 Swirl");
 	else if (fra->flame_p == 4)
-		var_name = ft_strcpy(tmp_str, "Variation_5 Polar");
+		ft_strcpy(tmp_str, "Variation_5 Polar");
 	else if (fra->flame_p == 5)
-		var_name = ft_strcpy(tmp_str, "Variation_6 Handkerchief");
+		ft_strcpy(tmp_str, "Variation_6 Handkerchief");
 	else if (fra->flame_p == 6)
-		var_name = ft_strcpy(tmp_str, "Variation_7 Heart");
+		ft_strcpy(tmp_str, "Variation_7 Heart");
 	else if (fra->flame_p == 7)
-		var_name = ft_strcpy(tmp_str, "Variation_8 Disc");
+		ft_strcpy(tmp_str, "Variation_8 Disc");
 	else
-		var_name = ft_strcpy(tmp_str, "");
-	free(tmp_str);
-	return (var_name);
+		ft_strcpy(tmp_str, "");
+	return (tmp_str);
 }
 
 char	*flame_name_b(t_fractal *fra)
 {
-	char *var_name;
 	char *tmp_str;
 
 	tmp_str = (char *)malloc(sizeof(char) * 40);
 	if (fra->flame_p == 8)
-		var_name = ft_strcpy(tmp_str, "Variation_9 Spiral");
+		ft_strcpy(tmp_str, "Variation_9 Spiral");
 	else if (fra->flame_p == 9)
-		var_name = ft_strcpy(tmp_str, "Variation_10 Hyperbolic");
+		ft_strcpy(tmp_str, "Variation_10 Hyperbolic");
 	else if (fra->flame_p == 10)
-		var_name = ft_strcpy(tmp_str, "Variation_11 Diamond");
+		ft_strcpy(tmp_str, "Variation_11 Diamond");
 	else if (fra->flame_p == 11)
-		var_name = ft_strcpy(tmp_str, "Variation_12 Ex");
+		ft_strcpy(tmp_str, "Variation_12 Ex");
 	else if (fra->flame_p == 12)
-		var_name = ft_strcpy(tmp_str, "Variation_13 Julia");
+		ft_strcpy(tmp_str, "Variation_13 Julia");
 	else if (fra->flame_p == 13)
-		var_name = ft_strcpy(tmp_str, "Variation_14 Bent");
+		ft_strcpy(tmp_str, "Variation_14 Bent");
 	else if (fra->flame_p == 14)
-		var_name = ft_strcpy(tmp_str, "Variation_15 Waves");
+		ft_strcpy(tmp_str, "Variation_15 Waves");
 	else if (fra->flame_p == 15)
-		var_name = ft_strcpy(tmp_str, "Variation_16 Fisheye");
+		ft_strcpy(tmp_str, "Variation_16 Fisheye");
 	else
-		var_name = ft_strcpy(tmp_str, "");
-	free(tmp_str);
-	return (var_name);
+		ft_strcpy(tmp_str, "");
+	return (tmp_str);
 }
 
 char	*flame_name_c(t_fractal *fra)
 {
-	char *var_name;
 	char *tmp_str;
 
 	tmp_str = (char *)malloc(sizeof(char) * 40);
 	if (fra->flame_p == 16)
-		var_name = ft_strcpy(tmp_str, "Variation_17 Popcorn");
+		ft_strcpy(tmp_str, "Variation_17 Popcorn");
 	else if (fra->flame_p == 17)
-		var_name = ft_strcpy(tmp_str, "Variation_18 Exponential");
+		ft_strcpy(tmp_str, "Variation_18 Exponential");
 	else if (fra->flame_p == 18)
-		var_name = ft_strcpy(tmp_str, "Variation_19 Power");
+		ft_strcpy(tmp_str, "Variation_19 Power");
 	else if (fra->flame_p == 19)
-		var_name = ft_strcpy(tmp_str, "Variation_20 Cosine");
+		ft_strcpy(tmp_str, "Variation_20 Cosine");
 	else if (fra->flame_p == 20)
-		var_name = ft_strcpy(tmp_str, "Variation_27 Eyefish");
+		ft_strcpy(tmp_str, "Variation_27 Eyefish");
 	else if (fra->flame_p == 21)
-		var_name = ft_strcpy(tmp_str, "Variation_28 Bubble");
+		ft_strcpy(tmp_str, "Variation_28 Bubble");
 	else if (fra->flame_p == 22)
-		var_name = ft_strcpy(tmp_str, "Variation_29 Cylinder");
+		ft_strcpy(tmp_str, "Variation_29 Cylinder");
 	else if (fra->flame_p == 23)
-		var_name = ft_strcpy(tmp_str, "Variation_42 Tangent");
+		ft_strcpy(tmp_str, "Variation_42 Tangent");
 	else
-		var_name = ft_strcpy(tmp_str, "");
-	free(tmp_str);
-	return (var_name);
+		ft_strcpy(tmp_str, "");
+	return (tmp_str);
 }
 
 char	*flame_name_d(t_fractal *fra)
 {
-	char *var_name;
 	char *tmp_str;
 
 	tmp_str = (char *)malloc(sizeof(char) * 40);
 	if (fra->flame_p == 24)
-		var_name = ft_strcpy(tmp_str, "Variation_48 Cross");
+		ft_strcpy(tmp_str, "Variation_48 Cross");
 	else
-		var_name = ft_strcpy(tmp_str, "");
-	free(tmp_str);
-	return (var_name);
+		ft_strcpy(tmp_str, "");
+	return (tmp_str);
 }
 
 void	str_flame(t_fractal *fra)
 {
 	void	*win;
 	void	*mlx;
-	char	*tmp_str;
 	char	*tmp_num;
 	char	*var_name;
 
 	win = fra->win_ptr;
 	mlx = fra->mlx_ptr;
-	tmp_str = (char *)malloc(sizeof(char) * 40);
 	tmp_num = ft_itoa(fra->flame_p);
 	if (fra->flame_p >= 0 && fra->flame_p <= 7)
 		var_name = flame_name_a(fra);
@@ -135,8 +125,8 @@ void	str_flame(t_fractal *fra)
 	mlx_string_put(mlx, win, 15, 40, TXT_COL, var_name);
 	mlx_string_put(mlx, win, WIDTH - 360, HEIGHT - 30, TXT_COL,\
 								"('Space':Change'+':Next'-':Last)");
-	free(tmp_str);
 	free(tmp_num);
+	free(var_name);
 }
 
 void	str_chaosgame(t_fractal *fra)
