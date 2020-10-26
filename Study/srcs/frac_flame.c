@@ -6,7 +6,7 @@
 /*   By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 17:37:58 by xtang             #+#    #+#             */
-/*   Updated: 2020/10/23 18:07:00 by xtang            ###   ########.fr       */
+/*   Updated: 2020/10/26 11:48:41 by xtang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	variation_select_a(t_multi_th *th, double *p_x, double *p_y,\
 }
 
 void	variation_select_b(t_multi_th *th, double *p_x, double *p_y,\
-														t_flame_co *f_co, int r_f)
+											t_flame_co *f_co, int r_f)
 {
 	double	x;
 	double	y;
@@ -397,7 +397,6 @@ void	samples_init(t_multi_th *th, t_complex_plain *plain,\
 	double	p_y;
 	int		r_d;
 
-	r_d = rand() % NUM_F;
 	samples = th->th_sample;
 	s_i = -20;
 	while (s_i < samples)
@@ -407,6 +406,7 @@ void	samples_init(t_multi_th *th, t_complex_plain *plain,\
 		i_i = 0;
 		while (i_i < FLAME_ITERATE)
 		{
+			r_d = rand() % NUM_F;
 			samples_iteration_select(&p_x, &p_y, th, f_co, r_d);
 			samples_symmetry(p_x, p_y, plain, f_pixel, f_co, r_d);
 			i_i++;

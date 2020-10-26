@@ -80,6 +80,23 @@ void	*draw_flame_thread(void *th_temp)
 		f_co[i].blue = (int)(drand48() * 256);
 		i++;
 	}
+	int debug;
+	debug = 0;
+	while(debug < NUM_F)
+	{
+		printf("f_co[%d].a = %f \n ", debug, f_co[debug].a);
+		printf("f_co[%d].b = %f \n ", debug, f_co[debug].b);
+		printf("f_co[%d].c = %f \n ", debug, f_co[debug].c);
+		printf("f_co[%d].d = %f \n ", debug, f_co[debug].d);
+		printf("f_co[%d].e = %f \n ", debug, f_co[debug].e);
+		printf("f_co[%d].f = %f \n ", debug, f_co[debug].f);
+		printf("f_co[%d].red = %d \n ", debug, f_co[debug].red);
+		printf("f_co[%d].green = %d \n ", debug, f_co[debug].green);
+		printf("f_co[%d].blue = %d \n ", debug, f_co[debug].blue);
+		printf("\n");
+		debug++;
+	}
+
 	s_i = -20;
 	while (s_i < samples)
 	{
