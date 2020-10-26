@@ -80,6 +80,18 @@ typedef struct	s_complex
 	double		im;
 }				t_complex;
 
+typedef struct	s_plane
+{
+	double		x;
+	double		y;
+}				t_plane;
+
+typedef struct	s_scr
+{
+	int		x;
+	int		y;
+}				t_scr;
+
 typedef struct	s_complex_plain
 {
 	t_complex	max;
@@ -120,6 +132,7 @@ typedef struct	s_flame_co
 	int		red;
 	int		green;
 	int		blue;
+	int		rand;
 }				t_flame_co;
 
 typedef	struct	s_f_pixel
