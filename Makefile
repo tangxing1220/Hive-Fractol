@@ -6,13 +6,13 @@
 #    By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/04 17:38:09 by xtang             #+#    #+#              #
-#    Updated: 2020/09/04 17:38:17 by xtang            ###   ########.fr        #
+#    Updated: 2020/10/26 17:13:19 by xtang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 
 INC_PATH = incl
 SRC_PATH = srcs
