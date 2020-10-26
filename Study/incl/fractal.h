@@ -159,14 +159,14 @@ void			print_usage(void);
 void			draw_burningship(t_fractal *fra);
 void			draw_julia(t_fractal *fra, t_mouse *mouse);
 void			draw_mandelbrot(t_fractal *fra);
-void			draw_flame(t_fractal *fra);
+
 void			draw_chaosgame(t_fractal *fra);
 
 int				assign_color(double newre, double newim, int i,\
 								t_fractal *fra);
 void			change_color(t_fractal *fra, t_mouse *mouse);
 void			color_pattern(int key, t_combi *combi);
-void			flame_pattern(int key, t_combi *combi);
+
 void			chaosgame_pattern(int key, t_combi *combi);
 
 void			fractal_controls(t_combi *combi);
@@ -175,5 +175,86 @@ void			fractal_zoom(int button, t_combi *combi);
 void			fractal_reset(t_combi *combi);
 void			fractal_redraw(t_combi *combi);
 void			clean_screen(t_fractal *fra);
+
+char			*flame_name_a(t_fractal *fra);
+char			*flame_name_b(t_fractal *fra);
+char			*flame_name_c(t_fractal *fra);
+char			*flame_name_d(t_fractal *fra);
+void			str_flame(t_fractal *fra);
+
+void			fractal_init(t_fractal **fra, char *name, t_mouse **mouse);
+void			clean_screen(t_fractal *fra);
+void			combi_init(t_combi **combi, t_fractal *fra, t_mouse *mouse);
+void			clean_screen(t_fractal *fra);
+
+/*
+**	frac_flame.c
+*/
+
+void			plain_random_init(t_complex_plain *plain, t_flame_co *f_co);
+void			free_memory(t_f_pixel **f_pixel, t_complex_plain *plain);
+void			*draw_flame_thread(void *th_temp);
+void			draw_flame(t_fractal *fra);
+void			flame_pattern(int key, t_combi *combi);
+
+/*
+**	frac_flame_a.c
+*/
+
+void			samples_init(t_multi_th *th, t_complex_plain *plain,\
+								t_flame_co *f_co, t_f_pixel **f_pixel);
+void			samples_iteration_select(t_plane *p, t_multi_th *th,\
+													t_flame_co *f_co);
+void			samples_symmetry(t_plane p, t_complex_plain *plain,\
+									t_f_pixel **f_pixel, t_flame_co *f_co);
+void			src_to_pixel(t_scr scr, t_f_pixel **f_pixel,\
+									t_flame_co *f_co, int rnd);
+
+/*
+**	frac_flame_b.c
+*/
+
+void			variation_select_a(t_multi_th *th, t_plane *p,\
+													t_flame_co *f_co, int r_f);
+void			variation_select_b(t_multi_th *th, t_plane *p,\
+											t_flame_co *f_co, int r_f);
+void			variation_select_c(t_multi_th *th, t_plane *p,\
+													t_flame_co *f_co, int r_f);
+void			variation_select_d(t_multi_th *th, t_plane *p,\
+													t_flame_co *f_co, int r_f);
+void			variation_select_e(t_multi_th *th, t_plane *p,\
+													t_flame_co *f_co, int r_f);
+
+/*
+**	frac_flame_c.c
+*/
+
+void			input_a(t_plane *p, double x, double y);
+void			input_b(t_plane *p, double x, double y);
+void			input_c(t_plane *p, double x, double y);
+void			input_d(t_plane *p, double x, double y);
+
+/*
+**	frac_flame_d.c
+*/
+
+void			variation_select_f(t_multi_th *th, t_plane *p,\
+													t_flame_co *f_co, int r_f);
+void			variation_select_g(t_multi_th *th, t_plane *p,\
+													t_flame_co *f_co, int r_f);
+void			variation_select_h(t_multi_th *th, t_plane *p,\
+													t_flame_co *f_co, int r_f);
+void			variation_select_i(t_multi_th *th, t_plane *p,\
+													t_flame_co *f_co, int r_f);
+void			variation_select_j(t_multi_th *th, t_plane *p,\
+													t_flame_co *f_co, int r_f);
+
+/*
+**	frac_flame_e.c
+*/
+
+int				pixel_log_density(t_f_pixel **f_pixel);
+void			pixel_gamma_factor(t_f_pixel **f_pixel, int max);
+void			rendering_flame(t_f_pixel **f_pixel, t_multi_th *th);
 
 #endif

@@ -28,7 +28,14 @@ SOURCES = main.c \
 		fractal_action.c \
 		show_str.c \
 		frac_chaosgame.c \
-		frac_flame.c
+		frac_flame.c \
+		frac_flame_a.c \
+		frac_flame_b.c \
+		frac_flame_c.c \
+		frac_flame_d.c \
+		frac_flame_e.c \
+		fractal_init.c \
+		show_str_flame.c
 
 SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
