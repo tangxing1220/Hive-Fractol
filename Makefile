@@ -6,7 +6,7 @@
 #    By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/04 17:38:09 by xtang             #+#    #+#              #
-#    Updated: 2020/11/03 11:15:40 by tiantian         ###   ########.fr        #
+#    Updated: 2020/11/03 13:34:21 by xtang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ tmp:
 	@mkdir	-p objs
 
 clean:
-	@echo "Delete object file in objs folder"
+	@echo "Delete object files in objs folder"
 	@make clean -C libft/
 	@rm -rf objs/
 
