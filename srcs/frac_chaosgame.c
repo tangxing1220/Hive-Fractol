@@ -55,13 +55,17 @@ void	draw_samples(t_fractal *fra, int *seed_x, int *seed_y)
 void	draw_chaosgame(t_fractal *fra)
 {
 	int		s_num;
-	int		seed_x[fra->chaosgame_seed];
-	int		seed_y[fra->chaosgame_seed];
+	int		*seed_x;
+	int		*seed_y;
 
+	seed_x = (int *)malloc(sizeof(int) * fra->chaosgame_seed);
+	seed_y = (int *)malloc(sizeof(int) * fra->chaosgame_seed);
 	s_num = fra->chaosgame_seed;
 	clean_screen(fra);
 	draw_seed(fra, seed_x, seed_y);
 	draw_samples(fra, seed_x, seed_y);
+	free(seed_x);
+	free(seed_y);
 }
 
 void	chaosgame_pattern(int key, t_combi *combi)
