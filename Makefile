@@ -6,7 +6,7 @@
 #    By: xtang <xtang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/04 17:38:09 by xtang             #+#    #+#              #
-#    Updated: 2020/10/31 11:04:23 by tiantian         ###   ########.fr        #
+#    Updated: 2020/11/03 11:15:40 by tiantian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,12 +47,12 @@ MLX = -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework
 all: libft tmp $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "Create project $(NAME) file"
+	@echo "Object files are created in objs folder"
+	@echo "$(NAME) is created"
 	@gcc $(FLAGS) -o $@ $^ -L libft/ -lft -I $(INC_PATH)/ $(MLX)
 
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c 
-#	@echo "Create object files in objs folder"
 	@gcc $(FLAGS) -c -o $@ $< -I $(INC_PATH)/ -I libft/includes
 
 libft:
@@ -62,12 +62,12 @@ tmp:
 	@mkdir	-p objs
 
 clean:
-	@echo "Delte library files"
+	@echo "Delete object file in objs folder"
 	@make clean -C libft/
 	@rm -rf objs/
 
 fclean: clean
-	@echo "Delte target files"
+	@echo "Delete $(NAME) file"
 	@make fclean -C libft/
 	@rm -f $(NAME)
 

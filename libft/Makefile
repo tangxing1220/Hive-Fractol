@@ -6,7 +6,7 @@
 #    By: xtang <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/18 18:00:46 by xtang             #+#    #+#              #
-#    Updated: 2019/10/22 15:46:09 by xtang            ###   ########.fr        #
+#    Updated: 2020/11/03 11:13:52 by tiantian         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -94,10 +94,10 @@ $(NAME): $(OBJ)
 
 clean:
 	@rm -f $(OBJ)
-	@echo "Deleted Libft library files"
+	@echo "Delete Libft library files"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(NAME) was deleted"
+	@echo "Delete $(NAME) file"
 
 re: fclean all
